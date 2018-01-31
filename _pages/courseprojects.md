@@ -1,8 +1,8 @@
 ---
 layout: archive
-title: "courseprojects"
+title: "Course Projects"
 permalink: /courseprojects/
 author_profile: true
 ---
 
-##Course Projects
+###Course Projects
