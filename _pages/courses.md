@@ -1,7 +1,7 @@
 ---
 layout: archive
-title: "Course Projects"
-permalink: /courseprojects/
+title: "Courses"
+permalink: /courses/
 author_profile: true
 ---
 
