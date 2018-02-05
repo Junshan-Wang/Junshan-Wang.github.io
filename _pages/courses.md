@@ -6,7 +6,6 @@ author_profile: true
 
 **********
 
-## Academic Main Courses
 Mathematical Analysis, Practice of Programming in C&C++, Data Structure and Algorithm, Algorithm Design and Analysis, Compiler Design, Operating Systems, Introduction to Computer Systems, Computer Organization, Microcomputer Experiments, Web Software Technology
 
 
@@ -16,4 +15,18 @@ Mathematical Analysis, Practice of Programming in C&C++, Data Structure and Algo
 
 ### Nachos Oprating System
 
-### A Simulator Based on RISC-V Instruction System Architecture 
+### RISC-V Simulator
+
+### War Craft Simulation
+
+### ICS Projects
+
+### Mine Sweeper
+
+### Calculator and Timer on FPGA 
+
+### Application of Filtering Algorithm
+
+### Elevator Controller on Microcomputer
+
+### Key Word Filtering Program for BBS
