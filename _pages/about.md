@@ -10,8 +10,11 @@ redirect_from:
 
 ## About me
 Hello! My name is Junshan Wang!
+
 I am a senior undergruaduate student in the Department of Computer Science, School of Electronics Engineering and Computer Science, Peking University.
+
 I am working in the Center of Information Science, Peking Univerity.
+
 My research interests include social networks, network embedding, data mining and machine leaning.
 
 ## Education
