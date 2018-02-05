@@ -8,6 +8,8 @@ redirect_from:
   - /about.html
 ---
 
+********
+
 Hello! My name is Junshan Wang!
 
 I am a senior undergruaduate student in the Department of Computer Science, School of Electronics Engineering and Computer Science, Peking University.
