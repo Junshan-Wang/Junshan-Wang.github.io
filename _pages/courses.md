@@ -5,4 +5,8 @@ permalink: /courses/
 author_profile: true
 ---
 
-###Course Projects
+**********
+
+## Academic Main Courses
+
+## Course Projects
