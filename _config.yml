@@ -247,10 +247,10 @@ defaults:
       author_profile: true
       share: true
       comments: true
-  # _courseprojects
+  # _courses
   - scope:
       path: ""
-      type: courseprojects
+      type: courses
     values:
       layout: single
       author_profile: true
