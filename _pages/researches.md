@@ -5,6 +5,8 @@ permalink: /researches/
 author_profile: true
 ---
 
+**********
+
 ## A Deep Spatial-Temporal Ensemble Model for Air Quality Prediction
 Air quality has drawn much attention on the recent years because it seriously affects people’s health. Nowadays, monitoring stations in a city can provide real-time air quality, but people also strongly desire air quality prediction, which is a challenging problem as it depends on several complicated factors, such as weather patterns and spatial-temporal dependencies of air quality. In this paper, we design a data-driven approach that utilizes historical air quality and meteorological data to predict air quality in the future. We propose a deep spatial-temporal ensemble(STE) model which is comprised of three components. The first component is an ensemble method to handle different weather patterns, partitioning training sets according to weather patterns, training multiple models and combining them dynamically. The second one is spatial correlation exploration by analyzing Granger causalities among stations and generating spatial data as relative stations and relative areas. The last one is a temporal predictor based on LSTM to learn both long-term and short-term dependencies of air quality. We evaluate our model with data from 35 monitoring stations in Beijing, China. The experiments show that each component of our model makes contribution to the improvement in prediction accuracy and the model is superior to baselines.
 
