@@ -5,4 +5,3 @@ permalink: /skills/
 author_profile: true
 ---
 
-My skills
