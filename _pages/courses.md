@@ -24,4 +24,5 @@ RISC-V simulator can run some simple program based on RISC-V instruction set. We
 We implement a elevator controller with assembly based on microcomputer and the experiment box of interface circuit to make the elevator run safely, stably and effectively. Meanwhile, we also utilize electronic keyboard to simulate the elevator buttons and indicator light, nixie tube and lattice to show the current status.
 
 ### Calculator and Timer on FPGA
+We implement a simple calculator and timer on FPGA. It realizes 8-bit addtion, multiplication and timer that can start, parse and reset.
 
