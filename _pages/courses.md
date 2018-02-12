@@ -21,7 +21,7 @@ Nachos is instructional software for teaching undergraduate, and potentially gra
 RISC-V simulator can run some simple program based on RISC-V instruction set. We resolve the ELF for header information and load the code and data into memory to execute instructions one by one. We simulate the pipeline processor and the multilevel cache.
 
 ### Elevator Controller on Microcomputer
-We implement a elevator controller based on microcomputer and the experiment box of interface circuit to make the elevator run safely, stably and effectively. Meanwhile, we also utilize electronic keyboard to simulate the elevator buttons and indicator light, nixie tube and lattice to show the current status.
+We implement a elevator controller with assembly based on microcomputer and the experiment box of interface circuit to make the elevator run safely, stably and effectively. Meanwhile, we also utilize electronic keyboard to simulate the elevator buttons and indicator light, nixie tube and lattice to show the current status.
 
 ### Calculator and Timer on FPGA
 
