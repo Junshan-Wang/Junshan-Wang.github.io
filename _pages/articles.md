@@ -8,4 +8,4 @@ author_profile: true
 
 ## Solutions
 
-[Leetcode Sort Colors](https://github.com/Junshan-Wang)
+[Leetcode Sort Colors](https://junshan-wang.github.io/articles/solutions/sortcolors)
