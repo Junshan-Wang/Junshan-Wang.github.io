@@ -1,6 +1,8 @@
 ---
 title: "Articles"
-permalink: /articles/solutions/sortcolors/
+permalink: /solutions/sortcolors/
 author_profile: true
 ---
 
+
+Sort Colors
