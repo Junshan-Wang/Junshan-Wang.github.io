@@ -9,7 +9,7 @@ author_profile: true
 ## main.py 
 主函数，执行入口
 
-### m ain():
+### main( ):
 接受参数，执行process
 
 ### process(args):
