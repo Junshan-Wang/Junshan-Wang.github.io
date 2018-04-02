@@ -169,19 +169,10 @@ kramdown:
 
 # Collections
 collections:
-  teaching:
-    output: true
-    permalink: /:collection/:path/
-  publications:
-    output: true
-    permalink: /:collection/:path/
-  portfolio:
-    output: true
-    permalink: /:collection/:path/
-  talks:
-    output: true
-    permalink: /:collection/:path/
   solutions:
+    output: true
+    permalink: /:collection/:path/
+  essays:
     output: true
     permalink: /:collection/:path/
 
@@ -236,21 +227,12 @@ defaults:
   # _articles
   - scope:
       path: ""
-      type: articles
+      type: others
     values:
       layout: single
       author_profile: true
       share: true
       comments: true
-  # _solutions
-  - scope:
-      path: ""
-      type: solutions
-    values:
-      layout: single
-      author_profile: true
-      comments: true
-      related: true
 
 # Sass/SCSS
 sass:
