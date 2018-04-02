@@ -1,7 +1,7 @@
 ---
 title: "DeepWalk"
 collection: essays
-permalink: /essays/Deepwalk/
+permalink: /essays/deepwalk/
 author_profile: true
 ---
 
