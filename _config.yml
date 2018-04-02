@@ -242,6 +242,15 @@ defaults:
       author_profile: true
       share: true
       comments: true
+  # _essays
+  - scope:
+      path: ""
+      type: essays
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
 
 # Sass/SCSS
 sass:
