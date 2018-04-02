@@ -12,4 +12,4 @@ author_profile: true
 
 ## Essays
 
-[Deepwalk代码阅读](https://junshan-wang.github.io/essays/deepwalk)
+[Deepwalk代码阅读](https://junshan-wang.github.io/essays/deepwalk_gensim_code_reading)

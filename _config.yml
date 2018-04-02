@@ -197,42 +197,6 @@ defaults:
     values:
       layout: single
       author_profile: true
-  # _researches
-  - scope:
-      path: ""
-      type: researches
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comments: true
-  # _courses
-  - scope:
-      path: ""
-      type: courses
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comments: true
-  # _skills
-  - scope:
-      path: ""
-      type: skills
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comments: true
-  # _others
-  - scope:
-      path: ""
-      type: others
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comments: true
   # _solutions
   - scope:
       path: ""
@@ -251,6 +215,7 @@ defaults:
       author_profile: true
       share: true
       comments: true
+
 
 # Sass/SCSS
 sass:

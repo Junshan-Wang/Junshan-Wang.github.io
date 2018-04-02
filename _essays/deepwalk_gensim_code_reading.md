@@ -1,12 +1,9 @@
 ---
-title: "DeepWalk"
+title: "DeepWalk 代码阅读"
 collection: essays
-permalink: /essays/deepwalk/
+permalink: /essays/deepwalk_gensim_code_reading/
 author_profile: true
 ---
-
-
-# Deepwalk 代码阅读  
 
 
 ## main.py 
