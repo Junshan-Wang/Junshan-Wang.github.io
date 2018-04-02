@@ -29,5 +29,5 @@ author_profile: true
 * `path_length`：游走序列的长度
 * `path`：游走序列的结点列表，从初始结点开始，有一定的随机概率回到初始结点，如果长度达到最大长度或者当前结点没有边，则序列结束
 
---
+---
 才发现该[代码](https://pypi.python.org/pypi/deepwalk)的实现是基于`gensim`而不是`tensorflow`  
