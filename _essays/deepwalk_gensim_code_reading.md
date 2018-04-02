@@ -8,7 +8,8 @@ author_profile: true
 
 ## main.py 
 主函数，执行入口
-### main():
+
+### m ain():
 接受参数，执行process
 
 ### process(args):
