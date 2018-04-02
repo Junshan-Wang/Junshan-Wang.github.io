@@ -203,7 +203,7 @@ defaults:
       type: solutions
     values:
       layout: single
-      author_profile: true
+      author_profile: false
   # _essays
   - scope:
       path: ""
