@@ -224,10 +224,19 @@ defaults:
       author_profile: true
       share: true
       comments: true
-  # _articles
+  # _others
   - scope:
       path: ""
       type: others
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
+  # _solutions
+  - scope:
+      path: ""
+      type: solutions
     values:
       layout: single
       author_profile: true
