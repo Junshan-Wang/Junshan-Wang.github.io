@@ -13,3 +13,4 @@ author_profile: true
 ## Essays
 
 [Deepwalk代码阅读](https://junshan-wang.github.io/essays/deepwalk_gensim_code_reading)
+[Word2vec代码阅读](https://junshan-wang.github.io/essays/word2vec_tensorflow_code_reading)
