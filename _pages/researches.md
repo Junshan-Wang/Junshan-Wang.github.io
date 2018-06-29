@@ -5,8 +5,8 @@ author_profile: true
 ---
 
 ## Publications
-1. Dynamic Network Embedding : An Extended Approach for Skip-gram based Network Embedding. Lun Du, Yun Wang, Guojie Song, Zhicong Lu, Junshan Wang. IJCAI 2018.
-2. A Deep Spatial-Temporal Ensemble Model for Air Quality Prediction. Junshan Wang, Guojie Song. Neurocomputing, Available online 28 June 2018, ISSN 0925-2312. [DOI](https://doi.org/10.1016/j.neucom.2018.06.049)
+1. A Deep Spatial-Temporal Ensemble Model for Air Quality Prediction. Junshan Wang, Guojie Song. Neurocomputing, Available online 28 June 2018, ISSN 0925-2312. [DOI](https://doi.org/10.1016/j.neucom.2018.06.049)
+2. Dynamic Network Embedding : An Extended Approach for Skip-gram based Network Embedding. Lun Du, Yun Wang, Guojie Song, Zhicong Lu, Junshan Wang. IJCAI 2018.
 
 
 ## Researches
