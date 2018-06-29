@@ -4,7 +4,12 @@ permalink: /researches/
 author_profile: true
 ---
 
-**********
+## Publications
+1. Dynamic Network Embedding : An Extended Approach for Skip-gram based Network Embedding. Lun Du, Yun Wang, Guojie Song, Zhicong Lu, Junshan Wang. IJCAI 2018.
+2. A Deep Spatial-Temporal Ensemble Model for Air Quality Prediction. Junshan Wang, Guojie Song. Neurocomputing, Available online 28 June 2018, ISSN 0925-2312. [DOI](https://doi.org/10.1016/j.neucom.2018.06.049)
+
+
+## Researches
 
 ### A Deep Spatial-Temporal Ensemble Model for Air Quality Prediction
 Air quality has drawn much attention on the recent years because it seriously affects people’s health. Nowadays, people strongly desire air quality prediction, which is a challenging problem as it depends on several complicated factors, such as weather patterns and spatial-temporal dependencies of air quality. In this paper, we design a data-driven approach that utilizes historical air quality and meteorological data to predict air quality in the future. We propose a deep spatial-temporal ensemble(STE) model which is comprised of three components. The first component is an ensemble method to handle different weather patterns. The second one is spatial correlation exploration. The last one is a temporal predictor based on LSTM. We evaluate our model with data from 35 monitoring stations in Beijing, China. The experiments show that each component of our model makes contribution to the improvement in prediction accuracy and the model is superior to baselines.
