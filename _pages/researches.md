@@ -6,7 +6,7 @@ author_profile: true
 
 ## Publications
 1. Junshan Wang, Zhicong Lu, Guojie Song, Yue Fan, Lun Du. Tag2Vec: Learning Tag Representations in Tag Networks. Accepted by TheWebConf 2019.
-2. Guojie Song, Yuanhao Li, Junshan Wang, Lun Dy. Inferring Explicit and Implicit Social Ties Simultane- ously in Mobile Social Network. Accepted by Science China Information Sciences 2019.
+2. Guojie Song, Yuanhao Li, Junshan Wang, Lun Du. Inferring Explicit and Implicit Social Ties Simultane- ously in Mobile Social Network. Accepted by Science China Information Sciences 2019.
 3. Junshan Wang, Guojie Song. A Deep Spatial-Temporal Ensemble Model for Air Quality Prediction. Accepted by Neurocomputng 2018.
 4. Lun Du, Yun Wang, Guojie Song, Zhicong Lu, Junshan Wang. Dynamic Network Embedding : An Extended Approach for Skip-gram based Network Embedding. Accepted by IJCAI 2018.
 
