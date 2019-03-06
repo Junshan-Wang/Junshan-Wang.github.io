@@ -5,8 +5,10 @@ author_profile: true
 ---
 
 ## Publications
-1. A Deep Spatial-Temporal Ensemble Model for Air Quality Prediction. Junshan Wang, Guojie Song. Neurocomputing, Available online 28 June 2018, ISSN 0925-2312. [DOI](https://doi.org/10.1016/j.neucom.2018.06.049)
-2. Dynamic Network Embedding : An Extended Approach for Skip-gram based Network Embedding. Lun Du, Yun Wang, Guojie Song, Zhicong Lu, Junshan Wang. IJCAI 2018.
+1. Junshan Wang, Zhicong Lu, Guojie Song, Yue Fan, Lun Du. Tag2Vec: Learning Tag Representations in Tag Networks. Accepted by TheWebConf 2019.
+2. Guojie Song, Yuanhao Li, Junshan Wang, Lun Dy. Inferring Explicit and Implicit Social Ties Simultane- ously in Mobile Social Network. Accepted by Science China Information Sciences 2019.
+3. Junshan Wang, Guojie Song. A Deep Spatial-Temporal Ensemble Model for Air Quality Prediction. Accepted by Neurocomputng 2018.
+4. Lun Du, Yun Wang, Guojie Song, Zhicong Lu, Junshan Wang. Dynamic Network Embedding : An Extended Approach for Skip-gram based Network Embedding. Accepted by IJCAI 2018.
 
 
 ## Researches
