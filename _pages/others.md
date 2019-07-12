@@ -9,6 +9,7 @@ author_profile: true
 ## Solutions
 
 1. [Leetcode Sort Colors](https://junshan-wang.github.io/solutions/sortcolors)
+2. [#240. Search a 2D Matrix II](https://junshan-wang.github.io/solutions/search_a_2d_matrix_2)
 
 ## Essays
 
