@@ -1,7 +1,7 @@
 ---
 title: "Search a 2D Matrix II"
 collection: solutions
-permalink: /solutions/search_a_2d_matrix_2.md/
+permalink: /solutions/search_a_2d_matrix_2/
 author_profile: true
 ---
 
