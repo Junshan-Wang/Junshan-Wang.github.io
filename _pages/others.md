@@ -9,6 +9,7 @@ author_profile: true
 ## Solutions
 
 1. [#240. Search a 2D Matrix II](https://junshan-wang.github.io/solutions/search_a_2d_matrix_2)
+1. [#33. Search in Rotated Sorted Array](https://junshan-wang.github.io/solutions/search_in_rotated_sorted_array)
 
 ## Essays
 
