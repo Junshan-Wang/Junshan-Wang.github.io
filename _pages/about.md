@@ -12,7 +12,7 @@ redirect_from:
 
 Hello! My name is Junshan Wang!
 
-I am a senior gruaduate student in the Department of Computer Science, School of Electronics Engineering and Computer Science, Peking University.
+I am a gruaduate student in the Department of Computer Science, School of Electronics Engineering and Computer Science, Peking University.
 
 I am working in the Center of Information Science, Peking Univerity.
 
