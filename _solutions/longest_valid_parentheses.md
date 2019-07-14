@@ -24,6 +24,8 @@ Output: 4
 Explanation: The longest valid parentheses substring is "()()"
 ```
 
+from LeetCode
+
 ---
 
 ### 解法 1

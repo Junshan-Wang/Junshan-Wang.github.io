@@ -28,11 +28,7 @@ Given target = `5`, return `true.`
 
 Given target = `20`, return `false`.
 
-
-
-来源：力扣（LeetCode）
-链接：https://leetcode-cn.com/problems/search-a-2d-matrix-ii
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+from Leetcode
 
 ---
 在一个排好序的一维数组中查找是否存在某个数，用二分查找的时间复杂度是`O(logn)`，即一个节点数为`n`的二叉树，查找的复杂度为从根节点到一个叶子结点的路径长度，即树的高度`logn`。
