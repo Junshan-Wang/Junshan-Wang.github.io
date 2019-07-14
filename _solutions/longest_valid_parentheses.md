@@ -1,5 +1,5 @@
 ---
-title: "32. Longest Valid Parentheses"
+title: "#32. Longest Valid Parentheses"
 collection: solutions
 permalink: /solutions/longest_valid_parentheses/
 author_profile: true

@@ -1,5 +1,5 @@
 ---
-title: "33. Search in Rotated Sorted Array"
+title: "#33. Search in Rotated Sorted Array"
 collection: solutions
 permalink: /solutions/search_in_rotated_sorted_array/
 author_profile: true
