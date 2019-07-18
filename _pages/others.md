@@ -12,6 +12,7 @@ author_profile: true
 * [LeetCode #33. Search in Rotated Sorted Array](https://junshan-wang.github.io/solutions/search_in_rotated_sorted_array/)
 * [LeetCode #32. Longest Valid Parentheses](https://junshan-wang.github.io/solutions/longest_valid_parentheses/)
 * [LeetCode #41. First Missing Positive](https://junshan-wang.github.io/solutions/first_missing_positive/)
+* [LeetCode #45. Jump Game II](https://junshan-wang.github.io/solutions/jump_game_2/)
 
 ## Essays
 
