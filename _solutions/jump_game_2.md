@@ -42,7 +42,8 @@ Your goal is to reach the last index in the minimum number of jumps.
 
 Example:
 
-```Input: [2,3,1,1,4]
+```
+Input: [2,3,1,1,4]
 Output: 2
 ```
 
