@@ -1,7 +1,7 @@
 ---
 title: "#56. Merge Intervals"
 collection: solutions
-permalink: /solutions/jump_game/
+permalink: /solutions/merge_intervals/
 author_profile: true
 ---
 
