@@ -13,8 +13,8 @@ author_profile: true
 * [LeetCode #32. Longest Valid Parentheses](https://junshan-wang.github.io/solutions/longest_valid_parentheses/)
 * [LeetCode #41. First Missing Positive](https://junshan-wang.github.io/solutions/first_missing_positive/)
 * [LeetCode #45. Jump Game II](https://junshan-wang.github.io/solutions/jump_game_2/)
-* [LeetCode #56. Merge Intervals](https://junshan-wang.github.io/solutions/merge_interval/)
-* * [LeetCode #84. Largest Rectangle in Histogram](https://junshan-wang.github.io/solutions/largest_rectangle_in_histogram/)
+* [LeetCode #56. Merge Intervals](https://junshan-wang.github.io/solutions/merge_interval/) 
+* [LeetCode #84. Largest Rectangle in Histogram](https://junshan-wang.github.io/solutions/largest_rectangle_in_histogram/)
 
 ## Essays
 
