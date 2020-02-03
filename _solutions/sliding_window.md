@@ -5,7 +5,7 @@ permalink: /solutions/sliding_window/
 author_profile: true
 ---
 
-### 思路
+## 滑动窗口的最大值/最小值数组
 生成滑动窗口的最大值/最小值数组，可以直接作为题目，也可以间接作为预处理方法。
 时间复杂度为$O(n)$。
 
@@ -16,8 +16,6 @@ author_profile: true
 * 如果`deque`不为空，且队尾元素的值比当前元素的值小，则弹出队尾元素。重复该过程直到不满足条件，然后将当前元素的索引压入队尾。
 * 如果队首和队尾的索引差值大于等于滑动窗口的大小，则说明此时队首应该不在滑动窗口内，所以弹出队首元素。
 * 此时`deque`的队首对应的值就是当前滑动窗口的最大值。
-
----
 
 ### 239. Sliding Window Maximum
 
@@ -46,8 +44,6 @@ vector<int> maxSlidingWindow(vector<int>& nums, int k) {
     return res;    
 }
 ```
-
----
 
 ### 683. K Empty Slots
 
@@ -146,3 +142,48 @@ int kEmptySlots(vector<int>& bulbs, int K) {
     return min_day == 100000 ? -1 : min_day + 1;
 }
 ```
+
+
+---
+
+## 至多K个不同字符的最长子字符串
+
+### 340. Longest Substring with At Most K Distinct Characters
+
+滑动窗口的应用（左右指针），同时需要用一个额外的数据结构统计每个字符的出现情况。
+
+#### 哈希表（`unordered_map<character, count>`）
+`right++`：如果出现了新字符，则`cnt++`，如果当前出现的次数`cnt`小于等于`k`，则重复上述过程；`left++`：如果某个字符的出现次数等于`0`，则`cnt++`，如果当前出现的次数`cnt`等于`k`，则重复上述过程。
+
+```
+int lengthOfLongestSubstringKDistinct(string s, int k) {
+    unordered_map<char, int> cha2cnt;
+    int left = 0, right = -1, cnt = 0, max_len = 0;
+    if (s.size() == 0 || k == 0) return 0;
+    while (right < (int)s.size()) {
+        while (cnt <= k && (++right) < s.size()) {
+            if (cha2cnt.find(s[right]) == cha2cnt.end() || cha2cnt[s[right]] == 0) {
+                cnt++;
+                cha2cnt[s[right]] = 0;
+            }
+            cha2cnt[s[right]]++;
+        }
+        if (right - left > max_len)
+            max_len = right - left;
+        while (cnt > k && left <= right) {
+            if (cha2cnt[s[left]] == 1) {
+                cnt--;
+            }
+            cha2cnt[s[left]]--;
+            left++;
+        }
+    }
+    return max_len;
+}
+```
+
+
+#### 哈希表（`unordered_map<character, right_most_position>`）
+
+
+#### 有序字典
