@@ -16,6 +16,7 @@ author_profile: true
 * [LeetCode #56. Merge Intervals](https://junshan-wang.github.io/solutions/merge_interval/) 
 * [LeetCode #84. Largest Rectangle in Histogram](https://junshan-wang.github.io/solutions/largest_rectangle_in_histogram/)
 * [Sliding Window](https://junshan-wang.github.io/solutions/sliding_window/)
+* [LeetCode #1074. Number of Submatrices That Sum to Target](https://junshan-wang.github.io/solutions/number_of_submatrices_that_sum_to_target/)
 
 ## Essays
 
