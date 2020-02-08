@@ -29,6 +29,28 @@ int subarraySum(vector<int>& nums, int k) {
 }
 ```
 
+### 325. Maximum Size Subarray Sum Equals k
+Given an array nums and a target value k, find the maximum length of a subarray that sums to k. If there isn't one, return 0 instead.
+
+解法类似，时间复杂度为`O(n)`。
+
+```
+int maxSubArrayLen(vector<int>& nums, int k) {
+    unordered_map<int, int> sums;
+    int cur = 0, ans = 0;
+    sums[0] = 0;
+    for (int i = 0; i < nums.size(); ++i) {
+        cur += nums[i];
+        if (sums.find(cur - k) != sums.end())
+            ans = (ans > i - sums[cur - k] + 1 ? ans : i - sums[cur - k] + 1);
+        if (sums.find(cur) == sums.end())
+            sums[cur] = i + 1;
+    }
+    return ans;
+}
+```
+
+
 ## 1074. Number of Submatrices That Sum to Target
 Given a matrix, and a target, return the number of non-empty submatrices that sum to target.
 
