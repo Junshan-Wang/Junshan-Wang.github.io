@@ -17,8 +17,10 @@ author_profile: true
 * [LeetCode #84. Largest Rectangle in Histogram](https://junshan-wang.github.io/solutions/largest_rectangle_in_histogram/)
 * [Sliding Window](https://junshan-wang.github.io/solutions/sliding_window/)
 * [LeetCode #1074. Number of Submatrices That Sum to Target](https://junshan-wang.github.io/solutions/number_of_submatrices_that_sum_to_target/)
+* [Depth First Search](https://junshan-wang.github.io/solutions/depth_first_search/)
 
 ## Essays
 
 1. [Deepwalk代码阅读](https://junshan-wang.github.io/essays/deepwalk_gensim_code_reading/)
 2. [Word2vec代码阅读](https://junshan-wang.github.io/essays/word2vec_tensorflow_code_reading/)
+3. [GNN Paper Reading](https://junshan-wang.github.io/essays/gnn_paper_reading_2020/)
