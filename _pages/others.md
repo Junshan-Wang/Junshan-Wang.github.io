@@ -18,6 +18,7 @@ author_profile: true
 * [Sliding Window](https://junshan-wang.github.io/solutions/sliding_window/)
 * [LeetCode #1074. Number of Submatrices That Sum to Target](https://junshan-wang.github.io/solutions/number_of_submatrices_that_sum_to_target/)
 * [Depth First Search](https://junshan-wang.github.io/solutions/depth_first_search/)
+* [Binary Search](https://junshan-wang.github.io/solutions/binary_search/)
 
 ## Essays
 
