@@ -15,10 +15,11 @@ author_profile: true
 * [LeetCode #45. Jump Game II](https://junshan-wang.github.io/solutions/jump_game_2/)
 * [LeetCode #56. Merge Intervals](https://junshan-wang.github.io/solutions/merge_interval/) 
 * [LeetCode #84. Largest Rectangle in Histogram](https://junshan-wang.github.io/solutions/largest_rectangle_in_histogram/)
-* [Sliding Window](https://junshan-wang.github.io/solutions/sliding_window/)
 * [LeetCode #1074. Number of Submatrices That Sum to Target](https://junshan-wang.github.io/solutions/number_of_submatrices_that_sum_to_target/)
+* [Sliding Window](https://junshan-wang.github.io/solutions/sliding_window/)
 * [Depth First Search](https://junshan-wang.github.io/solutions/depth_first_search/)
 * [Binary Search](https://junshan-wang.github.io/solutions/binary_search/)
+* [Greedy Algorithm](https://junshan-wang.github.io/solutions/greedy_algorithm/)
 
 ## Essays
 
