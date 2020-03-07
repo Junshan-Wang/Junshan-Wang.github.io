@@ -20,7 +20,8 @@ author_profile: true
 * [Depth First Search](https://junshan-wang.github.io/solutions/depth_first_search/)
 * [Binary Search](https://junshan-wang.github.io/solutions/binary_search/)
 * [Greedy Algorithm](https://junshan-wang.github.io/solutions/greedy_algorithm/)
-* [Stack / Queue](https://junshan-wang.github.io/solutions/stack_queue/)
+* [Stack / Heap / Queue](https://junshan-wang.github.io/solutions/stack_heap_queue/)
+* [Dynamic Programing](https://junshan-wang.github.io/solutions/dynamic_programing/)
 
 ## Essays
 

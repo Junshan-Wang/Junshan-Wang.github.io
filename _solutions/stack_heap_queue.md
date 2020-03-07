@@ -1,7 +1,7 @@
 ---
-title: "Stack / Queue"
+title: "Stack / Heap / Queue"
 collection: solutions
-permalink: /solutions/stack_queue/
+permalink: /solutions/stack_heap_queue/
 author_profile: true
 ---
 
