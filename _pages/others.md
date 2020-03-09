@@ -22,6 +22,7 @@ author_profile: true
 * [Greedy Algorithm](https://junshan-wang.github.io/solutions/greedy_algorithm/)
 * [Stack / Heap / Queue](https://junshan-wang.github.io/solutions/stack_heap_queue/)
 * [Dynamic Programing](https://junshan-wang.github.io/solutions/dynamic_programing/)
+* [String](https://junshan-wang.github.io/solutions/string/)
 
 ## Essays
 
