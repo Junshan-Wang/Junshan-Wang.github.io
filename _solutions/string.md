@@ -111,3 +111,88 @@ public:
     }
 };
 ```
+
+### 616. Add Bold Tag in String
+
+Given a string s and a list of strings dict, you need to add a closed pair of bold tag <b> and </b> to wrap the substrings in s that exist in dict. If two such substrings overlap, you need to wrap them together by only one pair of closed bold tag. Also, if two substrings wrapped by bold tags are consecutive, you need to combine them.
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/add-bold-tag-in-string
+
+这道题挺简单的，首先需要每一个字典中的字符串都需要在目标字符串中进行查找，无法更优化，时间复杂度可以认为达到O(n^3)。然后问题是如何加入tag，只需要引入一个mask辅助数组，将每次匹配成功的对应的所有字符都设置为1，当字典中的所有字符串都匹配完后，只需要在对应的mask为01交替的位置插入tag即可。
+
+```
+class Solution {
+public:
+    string addBoldTag(string s, vector<string>& dict) {
+        int p = -1;
+        string ans;
+        vector<int> mask(s.size(), 0);
+        for (string w : dict) {
+            while ((p = s.find(w, p + 1)) != string::npos) {
+                for (int i = p; i < p + w.size(); ++i) 
+                    mask[i] = 1;
+            }
+        }
+        for (int i = 0; i < s.size(); ++i) {
+            if (mask[i] == 1 && (i == 0 || mask[i - 1] == 0))
+                ans += "<b>";
+            ans += s[i];
+            if (mask[i] == 1 && (i == s.size() - 1 || mask[i + 1] == 0))
+                ans += "</b>";
+        }
+        return ans;
+    }
+};
+```
+
+### 1088. Confusing Number II
+
+We can rotate digits by 180 degrees to form new digits. When 0, 1, 6, 8, 9 are rotated 180 degrees, they become 0, 1, 9, 8, 6 respectively. When 2, 3, 4, 5 and 7 are rotated 180 degrees, they become invalid.
+
+A confusing number is a number that when rotated 180 degrees becomes a different number with each digit valid.(Note that the rotated number can be greater than the original number.)
+
+Given a positive integer N, return the number of confusing numbers between 1 and N inclusive.
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/confusing-number-ii
+
+由于该题中N可能很大，所以无法每个数都遍历，采取另一种策略。合法的数字只有0，1，6，8，9，所以直接递归，每一位逐渐增加，直到当前数大于N时停止递归。同时对于访问到的每一个数，判断其旋转后和当前是否相同（只需要一个位数不同即不相同，枚举即可），且注意到一个数只会被访问到一次，所以如果当前数合法，则总数直接加1即可。
+
+
+```
+class Solution {
+public:
+    int N;
+    int cnt;
+    int confusingNumberII(int N) {
+        this -> N = N;
+        this -> cnt = 0;
+        count(0);
+        return cnt;
+    }
+
+    void count(long long i) {
+        if (i > N) return;
+        if (diff(i)) {cnt += 1;}
+        if (i > 0) count(i * 10 + 0);
+        count(i * 10 + 1);
+        count(i * 10 + 6);
+        count(i * 10 + 8);
+        count(i * 10 + 9);
+    }
+
+    bool diff(int i) {
+        string s = to_string(i);
+        int n = s.size();
+        for (int j = 0; j < n / 2; ++j) {
+            if (s[j] == s[n - 1 - j] && s[j] != '6' && s[j] != '9') continue;
+            else if (s[j] == '6' && s[n - 1 - j] == '9') continue;
+            else if (s[j] == '9' && s[n - 1 - j] == '6') continue;
+            else return true;
+        }
+        if (n % 2 == 1 && (s[n / 2] == '6' || s[n / 2] == '9')) return true;
+        else return false;
+    }
+};
+```

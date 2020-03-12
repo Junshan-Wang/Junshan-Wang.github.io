@@ -23,6 +23,11 @@ author_profile: true
 * [Stack / Heap / Queue](https://junshan-wang.github.io/solutions/stack_heap_queue/)
 * [Dynamic Programing](https://junshan-wang.github.io/solutions/dynamic_programing/)
 * [String](https://junshan-wang.github.io/solutions/string/)
+* [Math](https://junshan-wang.github.io/solutions/math/)
+* [Union Find](https://junshan-wang.github.io/solutions/union_find/)
+* [Segment Tree](https://junshan-wang.github.io/solutions/segment_tree/)
+* [Trie](https://junshan-wang.github.io/solutions/trie/)
+
 
 ## Essays
 
