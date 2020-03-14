@@ -17,7 +17,7 @@ author_profile: true
 * [LeetCode #84. Largest Rectangle in Histogram](https://junshan-wang.github.io/solutions/largest_rectangle_in_histogram/)
 * [LeetCode #1074. Number of Submatrices That Sum to Target](https://junshan-wang.github.io/solutions/number_of_submatrices_that_sum_to_target/)
 * [Sliding Window](https://junshan-wang.github.io/solutions/sliding_window/)
-* [Depth First Search](https://junshan-wang.github.io/solutions/depth_first_search/)
+* [DFS / BFS](https://junshan-wang.github.io/solutions/dfs_bfs/)
 * [Binary Search](https://junshan-wang.github.io/solutions/binary_search/)
 * [Greedy Algorithm](https://junshan-wang.github.io/solutions/greedy_algorithm/)
 * [Stack / Heap / Queue](https://junshan-wang.github.io/solutions/stack_heap_queue/)

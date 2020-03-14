@@ -1,7 +1,7 @@
 ---
-title: "Depth First Search (DFS)"
+title: "Depth First Search (DFS) / Breadth First Search"
 collection: solutions
-permalink: /solutions/depth_first_search/
+permalink: /solutions/dfs_bfs/
 author_profile: true
 ---
 

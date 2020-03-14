@@ -25,6 +25,10 @@ Note:
 1 <= w[i] <= 10^5
 pickIndex will be called at most 10000 times.
 
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/random-pick-with-weight
+
+
 根据题意，保存一个数组，是到当前元素的权重之和，则该数组的元素是递增的。每次`pick`的时候，调用随机函数生成一个随机数，查找该数处于那个位置即可，查找过程用二分查找，可以直接调用`lower_bound`函数即可（注意不是`upper_bound`）。
 
 ```
@@ -54,6 +58,9 @@ Create a timebased key-value store class TimeMap, that supports two operations.
 Returns a value such that set(key, value, timestamp_prev) was called previously, with timestamp_prev <= timestamp.
 If there are multiple such values, it returns the one with the largest timestamp_prev.
 If there are no values, it returns the empty string ("").
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/time-based-key-value-store
 
 对每一个`key`保存每一个`timestamp`，由于题目中给定了时间片是递增的，所以`vector`直接插入即可，而查找时直接进行二分查找。
 
@@ -98,6 +105,10 @@ times is a strictly increasing array with all elements in [0, 10^9].
 TopVotedCandidate.q is called at most 10000 times per test case.  
 TopVotedCandidate.q(int t) is always called with t >= times[0].
 
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/online-election
+
 类似上述解法，需要注意预处理的时候，每次改变状态时将当前新的候选人和时间加入数组中。进行二分查找。
 
 ```
@@ -129,6 +140,66 @@ public:
 };
 ```
 
+### 1146. Snapshot Array
+
+Implement a SnapshotArray that supports the following interface:
+
+SnapshotArray(int length) initializes an array-like data structure with the given length.  Initially, each element equals 0.  
+void set(index, val) sets the element at the given index to be equal to val.  
+int snap() takes a snapshot of the array and returns the snap_id: the total number of times we called snap() minus 1.  
+int get(index, snap_id) returns the value at the given index, at the time we took the snapshot with the given snap_id
+
+来源：力扣（LeetCode）   
+链接：https://leetcode-cn.com/problems/snapshot-array
+
+直接在每个snapshot都保存一遍整个数组，内存开销过大。所以采用保存数组改变量的方法，只在数组发生改变时进行修改。这样的问题是查找时需要找到指定snapshot之前的结果，由于时间满足有序数组，所以可以用二分查找进行加速。
+
+```
+class SnapshotArray {
+public:
+    unordered_map<int, int> idx2val;
+    vector<int> a;
+    vector<vector<int>> snap_a;
+    vector<vector<int>> snap_t;
+    int t;
+    SnapshotArray(int length) {
+        a = vector<int>(length, 0);
+        snap_a = vector<vector<int>>(length, vector<int>(0));
+        snap_t = vector<vector<int>>(length, vector<int>(0));
+        t = 0;
+    }
+    
+    void set(int index, int val) {
+        idx2val[index] = val;
+    }
+    
+    int snap() {
+        for (unordered_map<int, int>::iterator it = idx2val.begin(); it != idx2val.end(); it++) {
+            int i = it -> first, val = it -> second;
+            if (snap_a[i].size() == 0 || val != snap_a[i][snap_a[i].size() - 1]) {
+                snap_a[i].push_back(val);
+                snap_t[i].push_back(t);
+            }
+        }
+        return t++; 
+    }
+    
+    int get(int index, int snap_id) {
+        int pos = upper_bound(snap_t[index].begin(), snap_t[index].end(), snap_id) - snap_t[index].begin() - 1;
+        return pos == -1 ? 0 : snap_a[index][pos];
+    }
+};
+
+/**
+ * Your SnapshotArray object will be instantiated and called as such:
+ * SnapshotArray* obj = new SnapshotArray(length);
+ * obj->set(index,val);
+ * int param_2 = obj->snap();
+ * int param_3 = obj->get(index,snap_id);
+ */
+ ```
+
+
 
 ---
 
@@ -145,6 +216,9 @@ Note:
 If n is the length of array, assume the following constraints are satisfied:
 
 1 ≤ n ≤ 1000，1 ≤ m ≤ min(50, n)
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/split-array-largest-sum
 
 用二分查找+贪心的解法，找最大值的最小值，搜索下界为0，上界为所有元素求和。搜索时，依次遍历每一个元素，如果大于当前阈值，则划分一个新的子数组，直到所有元素遍历完或者已经有m大于阈值的子数组了。如果当前解满足条件，则解在当前解左边，移动右指针，否则移动左指针。时间复杂度是`O(n log sums[n-1])`。
 
@@ -218,6 +292,9 @@ Constraints:
 
 0 <= K < sweetness.length <= 10^4，1 <= sweetness[i] <= 10^5
 
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/divide-chocolate
+
 和上一题类似，不过最优解相反，求的是最小值的最大值。用二分法做的时间开销约为`n log sums[n-1] = 10^4 log 10^4*10^5 = 10^5`，而用动态规划的时间开销约为`n^2K=10^13`，所以这一题用动态规划会超时，只能用二分法求解。
 
 ```
@@ -253,6 +330,9 @@ On a horizontal number line, we have gas stations at positions stations[0], stat
 Now, we add K more gas stations so that D, the maximum distance between adjacent gas stations, is minimized.
 
 Return the smallest possible value of D.
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/minimize-max-distance-to-gas-station
 
 查找最小的可能距离`D`。对于每一距离`d`，我们可以检查它是否满足条件，即是否能保证新建`K`个加油站后彼此之间距离小于`d`。如果满足条件，则将`d`缩小，从而寻找更小的可能`d`；如果不满足条件，则放大`d`，直到找到可能的`d`。而这个放大缩小的过程可以用二分查找的思路。由于此时查找的不再是整数，而是浮点数，所以停止的条件是左右指针之间的距离小于给定误差范围。时间复杂度为`O(N log station[N-1])=10^4`。
 
