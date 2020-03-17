@@ -196,3 +196,136 @@ public:
     }
 };
 ```
+
+### 248. Strobogrammatic Number III
+
+A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
+
+Write a function to count the total strobogrammatic numbers that exist in the range of low <= num <= high.
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/strobogrammatic-number-iii
+
+和上一题类似，但实际上更简单，不需要遍历每一种情况判断，只需要把对称的数字分别加在左右两侧即可。
+
+```
+class Solution {
+public:
+    string low, high;
+    int cnt;
+    int strobogrammaticInRange(string low, string high) {
+        this -> low = low;
+        this -> high = high;
+        count("");
+        count("0");
+        count("1");
+        count("8");
+        return cnt;
+    }
+
+    bool cmp(string x, string y) {
+        if (x.size() != y.size()) return x.size() < y.size();
+        else return x <= y;
+    }
+
+    void count(string i) {
+        if (!cmp(i, high)) return;
+        if (cmp(low, i) && !(i[0] == '0' && i.size() > 1)) {cnt += 1; }
+        count("0" + i + "0");
+        count("1" + i + "1");
+        count("9" + i + "6");
+        count("8" + i + "8");
+        count("6" + i + "9");
+    }
+};
+```
+
+### 1096. Brace Expansion II
+
+Under a grammar given below, strings can represent a set of lowercase words.  Let's use R(expr) to denote the set of words the expression represents.
+
+Grammar can best be understood through simple examples:
+
+Single letters represent a singleton set containing that word.
+R("a") = {"a"}
+R("w") = {"w"}
+When we take a comma delimited list of 2 or more expressions, we take the union of possibilities.
+R("{a,b,c}") = {"a","b","c"}
+R("{{a,b},{b,c}}") = {"a","b","c"} (notice the final set only contains each word at most once)
+When we concatenate two expressions, we take the set of possible concatenations between two words where the first word comes from the first expression and the second word comes from the second expression.
+R("{a,b}{c,d}") = {"ac","ad","bc","bd"}
+R("a{b,c}{d,e}f{g,h}") = {"abdfg", "abdfh", "abefg", "abefh", "acdfg", "acdfh", "acefg", "acefh"}
+Formally, the 3 rules for our grammar:
+
+For every lowercase letter x, we have R(x) = {x}
+For expressions e_1, e_2, ... , e_k with k >= 2, we have R({e_1,e_2,...}) = R(e_1) ∪ R(e_2) ∪ ...
+For expressions e_1 and e_2, we have R(e_1 + e_2) = {a + b for (a, b) in R(e_1) × R(e_2)}, where + denotes concatenation, and × denotes the cartesian product.
+Given an expression representing a set of words under the given grammar, return the sorted list of words that the expression represents.
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/brace-expansion-ii
+
+主要的思想是递归+栈。  
+找到每一对花括号，递归返回花括号内部运算后的集合。  
+然后相当于一个只有加法和乘法的运算，注意到这里需要考虑优先级（神坑！）。先计算所有乘法，再计算加法即可。
+
+```
+class Solution {
+public:
+    vector<string> braceExpansionII(string expression) {
+        int i = 0;
+        stack<vector<string>> st;
+        while (i < expression.size()) {
+            vector<string> inner(0);
+            if (expression[i] == '{') {
+                int j = i, k = 1;
+                while (k > 0) {
+                    j++;
+                    if (expression[j] == '{') k++;
+                    else if (expression[j] == '}') k--;
+                }
+                inner = braceExpansionII(expression.substr(i + 1, j - i - 1));
+                i = j + 1;
+            }
+            else if (expression[i] == ',') {
+                st.push(vector<string>(0));
+                i++;
+                continue;
+            }
+            else {
+                inner.push_back(string(1, expression[i]));
+                i++;
+            }
+
+            if (st.empty() || st.top().size() == 0) st.push(inner);
+            else {
+                vector<string> t1 = st.top();
+                vector<string> t2(0);
+                st.pop();
+                for (string s : t1) {
+                    for (string cur : inner) {
+                        t2.push_back(s + cur);
+                    }
+                }
+                st.push(t2);
+            } 
+        }
+
+        vector<string> res1;
+        unordered_set<string> res2;
+        while (!st.empty()) {
+            if (st.top().size() != 0) {
+                vector<string> t = st.top();
+                for (string s : t) res2.insert(s);
+            }
+            st.pop();
+        }
+        for (unordered_set<string>::iterator it = res2.begin(); it != res2.end(); it++)
+                res1.push_back(*it);
+        sort(res1.begin(), res1.end());
+
+        return res1;
+    }
+
+};
+```

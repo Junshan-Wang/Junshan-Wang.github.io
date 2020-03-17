@@ -27,6 +27,8 @@ author_profile: true
 * [Union Find](https://junshan-wang.github.io/solutions/union_find/)
 * [Segment Tree](https://junshan-wang.github.io/solutions/segment_tree/)
 * [Trie](https://junshan-wang.github.io/solutions/trie/)
+* [Binar Tree](https://junshan-wang.github.io/solutions/binary_tree/)
+* [Graph](https://junshan-wang.github.io/solutions/graph/)
 
 
 ## Essays

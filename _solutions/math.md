@@ -67,3 +67,96 @@ public:
     }
 };
 ```
+
+---
+
+## 函数性质
+
+### 360. Sort Transformed Array
+
+Given a sorted array of integers nums and integer values a, b and c. Apply a quadratic function of the form f(x) = ax2 + bx + c to each element x in the array.
+
+The returned array must be in sorted order.
+
+Expected time complexity: O(n)
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/sort-transformed-array
+
+根据抛物线的性质，即结果先增后减（先减后增），可以实现在O(n)的复杂度内进行排序。
+
+```
+class Solution {
+public:
+    vector<int> sortTransformedArray(vector<int>& nums, int a, int b, int c) {
+        vector<int> res1, res2;
+        int min_idx = 0, neg = (a < 0);
+        for (int i : nums) res1.push_back(a * i * i + b * i + c);
+        if (neg) for (int i = 0; i < res1.size(); ++i) res1[i] = - res1[i];
+
+        for (int i = 1; i < res1.size(); ++i) {
+            if (res1[i] < res1[i - 1]) min_idx = i;
+        }
+
+        int p1 = 0, p2 = 1;
+        for (int i = 0; i < res1.size(); ++i) {
+            if (min_idx - p1 < 0) res2.push_back(res1[min_idx + (p2++)]);
+            else if (min_idx + p2 >= res1.size()) res2.push_back(res1[min_idx - (p1++)]);
+            else if (res1[min_idx - p1] <= res1[min_idx + p2]) res2.push_back(res1[min_idx - (p1++)]);
+            else res2.push_back(res1[min_idx + (p2++)]);
+        }
+        
+        if (neg) {
+            for (int i = 0; i < res2.size() / 2; ++i) {
+                int tmp = res2[i];
+                res2[i] = res2[res2.size() - 1 - i];
+                res2[res2.size() - 1 - i] = tmp;
+            }
+            for (int i = 0; i < res2.size(); ++i) res2[i] = - res2[i];
+        }
+        return res2;
+    }
+};
+```
+
+---
+
+### 280. Wiggle Sort
+
+Given an unsorted array nums, reorder it in-place such that nums[0] <= nums[1] >= nums[2] <= nums[3]....
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/wiggle-sort
+
+最直接的是先排序的做法，然后相邻两个数字交换即可，时间复杂度是O(nlogn)。
+
+```
+class Solution {
+public:
+    void wiggleSort(vector<int>& nums) {
+        if (nums.size() == 0) return;
+        sort(nums.begin(), nums.end());
+        for (int i = 1; i < nums.size() - 1; i += 2) {
+            int t = nums[i + 1];
+            nums[i + 1] = nums[i];
+            nums[i] = t;
+        }
+    }
+};
+```
+
+然而实际上，可以不用排序。直接考虑相邻两个数字。在奇数位，如果`nums[i] < nums[i + 1]`，由于`nums[i - 1] < nums[i]`，所以直接交换两数即可，由传递性，可以保证`nums[i - 1] < nums[i + 1] > nums[i]`。在偶数位同理。
+
+依次遍历数组元素，局部的修改不会受到之前结果的影响。
+
+```
+class Solution {
+public:
+    void wiggleSort(vector<int>& nums) {
+        for (int i = 0; i < nums.size(); i += 2) {
+            if (i + 1 < nums.size() && nums[i] > nums[i + 1]) swap(nums[i], nums[i + 1]);
+            if (i + 2 < nums.size() && nums[i + 1] < nums[i + 2]) swap(nums[i + 1], nums[i + 2]);
+        }
+    }
+};
+```

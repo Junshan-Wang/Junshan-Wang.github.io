@@ -301,3 +301,53 @@ public:
     }
 };
 ```
+
+### 403. Frog Jump
+
+A frog is crossing a river. The river is divided into x units and at each unit there may or may not exist a stone. The frog can jump on a stone, but it must not jump into the water.
+
+Given a list of stones' positions (in units) in sorted ascending order, determine if the frog is able to cross the river by landing on the last stone. Initially, the frog is on the first stone and assume the first jump must be 1 unit.
+
+If the frog's last jump was k units, then its next jump must be either k - 1, k, or k + 1 units. Note that the frog can only jump in the forward direction.
+
+Note:  
+The number of stones is ≥ 2 and is < 1,100.  
+Each stone's position will be a non-negative integer < 231.  
+The first stone's position is always 0.
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/frog-jump
+
+直接暴力搜索的复杂度是O(3^n)。
+
+考虑到🐸只能往前跳，并且石头数量较少，且每个时刻能够跳的距离k最多为石头数量，因此可以用动态规划求解。`dp[i][k]`表示是否能在最后一跳以k的距离到达i位置。
+
+* `dp[i][k] = dp[i - k][k - 1] | dp[i - k][k] | dp[i - k][k + 1]`。
+
+
+
+```
+class Solution {
+public:
+    bool canCross(vector<int>& stones) {
+        unordered_map<int, vector<bool>> dp;
+        dp[0] = vector<bool>{true};
+        for (int i : stones) {
+            if (i == 0) continue;
+            int cap = dp.size() + 1;
+            dp[i] = vector<bool>(cap, false);
+            for (int k = 1; k < cap && k <= i / 2 + 1; ++k) {
+                if (dp.find(i - k) != dp.end()) {
+                    if (k < dp[i - k].size()) dp[i][k] = dp[i][k] | dp[i - k][k];
+                    if (k - 1 < dp[i - k].size()) dp[i][k] = dp[i][k] | dp[i - k][k - 1];
+                    if (k + 1 < dp[i - k].size()) dp[i][k] = dp[i][k] | dp[i - k][k + 1];
+                }
+            }
+        }
+        for (int k = 1; k < dp[*stones.rbegin()].size(); ++k) {
+            if (dp[*stones.rbegin()][k]) return true;
+        }
+        return false;
+    }
+};
+```

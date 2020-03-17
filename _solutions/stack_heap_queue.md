@@ -178,6 +178,110 @@ public:
 };
 ```
 
+### 5359. Maximum Performance of a Team
+There are n engineers numbered from 1 to n and two arrays: speed and efficiency, where speed[i] and efficiency[i] represent the speed and efficiency for the i-th engineer respectively. Return the maximum performance of a team composed of at most k engineers, since the answer can be a huge number, return this modulo 10^9 + 7.
+
+The performance of a team is the sum of their engineers' speeds multiplied by the minimum efficiency among their engineers. 
+
+
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/maximum-performance-of-a-team
+
+
+和上题类似的做法，贪心+优先队列。
+
+
+```
+class Solution {
+public:
+    int maxPerformance(int n, vector<int>& speed, vector<int>& efficiency, int k) {
+        vector<pair<int, int>> eff_idx;
+        priority_queue<int, vector<int>, greater<int>> spd;
+        long long sum = 0, res = 0;
+        
+        for (int i = 0; i < n; ++i) eff_idx.push_back(make_pair(efficiency[i], i));
+        sort(eff_idx.begin(), eff_idx.end(), greater<pair<int, int>>());
+        
+        for (int i = 0; i < n; ++i) {
+            int eff = eff_idx[i].first, idx = eff_idx[i].second;
+            
+            if (spd.size() < k) {
+                sum += speed[idx];
+                spd.push(speed[idx]);
+            }
+            else if (spd.top() < speed[idx]) {
+                sum -= spd.top();
+                sum += speed[idx];
+                spd.pop();
+                spd.push(speed[idx]);
+            }
+            
+            res = max(res, sum * eff);
+        }
+        return res % ((int)pow(10, 9) + 7);
+    }
+};
+```
+
+### 218. The Skyline Problem
+
+A city's skyline is the outer contour of the silhouette formed by all the buildings in that city when viewed from a distance. Now suppose you are given the locations and height of all the buildings as shown on a cityscape photo (Figure A), write a program to output the skyline formed by these buildings collectively (Figure B).
+
+The geometric information of each building is represented by a triplet of integers [Li, Ri, Hi], where Li and Ri are the x coordinates of the left and right edge of the ith building, respectively, and Hi is its height. It is guaranteed that 0 ≤ Li, Ri ≤ INT_MAX, 0 < Hi ≤ INT_MAX, and Ri - Li > 0. You may assume all buildings are perfect rectangles grounded on an absolutely flat surface at height 0.
+
+For instance, the dimensions of all buildings in Figure A are recorded as: [ [2 9 10], [3 7 15], [5 12 12], [15 20 10], [19 24 8] ] .
+
+The output is a list of "key points" (red dots in Figure B) in the format of [ [x1,y1], [x2, y2], [x3, y3], ... ] that uniquely defines a skyline. A key point is the left endpoint of a horizontal line segment. Note that the last key point, where the rightmost building ends, is merely used to mark the termination of the skyline, and always has zero height. Also, the ground in between any two adjacent buildings should be considered part of the skyline contour.
+
+For instance, the skyline in Figure B should be represented as:[ [2 10], [3 15], [7 12], [12 0], [15 10], [20 8], [24, 0] ].
+
+Notes:
+
+The number of buildings in any input list is guaranteed to be in the range [0, 10000].  
+The input list is already sorted in ascending order by the left x position Li.  
+The output list must be sorted by the x position.  
+There must be no consecutive horizontal lines of equal height in the output skyline. For instance, [...[2 3], [4 5], [7 5], [11 5], [12 7]...] is not acceptable; the three lines of height 5 should be merged into one in the final output as such: [...[2 3], [4 5], [12 7], ...]
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/the-skyline-problem
+
+采用扫描线的方法，把每个建筑物的起始线和结束线按顺序排列好（注意x轴相同但y轴不同时的顺序）。依次扫描，如果当前线的高度大于已有线的最大高度（由于最大高度会一直更新，所以用最大堆维护，然而由于这里不仅要更新堆顶，而有可能删除其中任意元素，所以实际上用一个multiset来维护），则会产生关键点，此外还要更新最大高度的multiset。
+
+```
+class Solution {
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        vector<pair<int, int>> lines;
+        multiset<int> heights;
+        vector<vector<int>> res;
+        for (int i = 1; i <= buildings.size(); ++i) {
+            lines.push_back(make_pair(buildings[i - 1][0], - buildings[i - 1][2]));
+            lines.push_back(make_pair(buildings[i - 1][1], buildings[i - 1][2]));
+        }
+        sort(lines.begin(), lines.end());
+        heights.insert(0);
+
+        for (int i = 0; i < lines.size(); ++i) {
+            int x = lines[i].first, h = lines[i].second;
+            if (h < 0) {
+                h = - h;
+                if (h > *heights.rbegin()) 
+                    res.push_back(vector<int>{x, h});
+                heights.insert(h);
+            }
+            else {
+                heights.erase(heights.find(h));
+                if (h > *heights.rbegin()) 
+                    res.push_back(vector<int>{x, *heights.rbegin()});
+            }
+        }
+        return res;
+    }
+};
+```
+
+
 ---
 ## 栈
 
