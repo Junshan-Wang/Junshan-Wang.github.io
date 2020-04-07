@@ -103,6 +103,23 @@ int kEmptySlots(vector<int>& bulbs, int K) {
 
 * 对于每一个元素，查找和插入都需要$O(\log n)$的复杂度，所以时间复杂度：$O(n \log n)$
 
+```
+class Solution {
+public:
+    int kEmptySlots(vector<int>& bulbs, int K) {
+        set<int> s;
+        for (int i = 0; i < bulbs.size(); ++i) {
+            int bulb = bulbs[i];
+            set<int>::iterator pos = s.insert(bulb).first;
+            if (pos != s.begin() && bulb - (*(prev(pos))) - 1 == K) return i + 1;
+            if (pos != s.end() && (*(next(pos))) - bulb - 1 == K) return i + 1;
+            
+        }
+        return -1;
+    }
+};
+```
+
 
 #### 滑动窗口求最小值
 
@@ -146,7 +163,7 @@ int kEmptySlots(vector<int>& bulbs, int K) {
 
 ---
 
-## 至多K个不同字符的最长子字符串
+## 给定条件的子字符串
 
 ### 340. Longest Substring with At Most K Distinct Characters
 
@@ -187,3 +204,59 @@ int lengthOfLongestSubstringKDistinct(string s, int k) {
 
 
 #### 有序字典
+
+### 76. Minimum Window Substring
+
+Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
+
+题目没有说清楚，实际上是要求满足出现的字符及对应次数。
+
+显然可以用两个指针遍历S，用三个hash表`unordered_map`分别保存T中出现的字符（提前处理）、S中出现的字符、S中出现的已经满足T中数量的字符。因此在每次修改指针时，需要判断S中满足条件的字符数和T中的字符数是否相等，同时更新S中出现的字符，以及可能更新S中满足条件的字符。
+
+```
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        unordered_map<char, int> t2c, s2c, s2match;
+        for (int i = 0; i < t.size(); ++i) {
+            if (t2c.find(t[i]) == t2c.end()) t2c[t[i]] = 0;
+            t2c[t[i]] += 1;
+        }
+        
+        int i = 0, j = 0, min_len = s.size() + 1, min_i = -1;
+        while (j < s.size()) {
+            while (j < s.size() && s2match.size() < t2c.size()) {
+                if (t2c.find(s[j]) != t2c.end()) {
+                    if (s2c.find(s[j]) == s2c.end()) s2c[s[j]] = 0;
+                    s2c[s[j]] += 1;
+                    if (s2c[s[j]] >= t2c[s[j]]) s2match[s[j]] = 1;
+                }
+                j++;
+            }
+            while (i <= j && s2match.size() == t2c.size()) {
+                if (j - i < min_len) {
+                    min_len = j - i;
+                    min_i = i;
+                }
+                if (t2c.find(s[i]) != t2c.end()) {
+                    s2c[s[i]] -= 1;
+                    if (s2c[s[i]] < t2c[s[i]]) s2match.erase(s[i]);
+                }
+                i++;
+            }
+        }
+        if (min_i == -1) return "";
+        else return s.substr(min_i, min_len);
+    }
+
+    bool satisfy(unordered_map<char, int>& t2c, unordered_map<char, int>& s2c) {
+        for (unordered_map<char, int>::iterator it = t2c.begin(); it != t2c.end(); it++) {
+            char key = it -> first;
+            int cnt = it -> second;
+            if (s2c.find(key) == s2c.end()) return false;
+            else if (s2c[key] < cnt) return false;
+        }
+        return true;
+    }
+};
+```

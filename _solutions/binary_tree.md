@@ -109,3 +109,57 @@ public:
     }
 };
 ```
+
+### 285. Inorder Successor in BST
+
+Given a binary search tree and a node in it, find the in-order successor of that node in the BST.
+
+The successor of a node p is the node with the smallest key greater than p.val.
+
+考虑一下哪种情况下会获得给定值的后继节点：
+* 如果该节点有右子树，则后继节点是右子树的小值，即右子树的最左节点
+* 如果该节点无右子树，则后继节点是该节点的第一个作为左子树的父亲
+  
+第一种方法通过回溯来实现。
+
+```
+class Solution {
+public:
+    TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
+        return travel(root, p -> val);
+    }
+    
+    TreeNode* travel(TreeNode* root, int val) {
+        if (root == NULL) return NULL;
+        if (val == root -> val) return travel(root -> right, val);
+        else if (val < root -> val) {
+            TreeNode* t = travel(root -> left, val);
+            if (t == NULL) return root;
+            else return t;
+        }
+        else return travel(root -> right, val);
+    }
+};
+```
+
+第二种方法可以通过非递归直接实现。
+
+```
+class Solution {
+public:
+    TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
+        TreeNode *res = NULL, *cur = root;
+        while (cur != NULL) {
+            if (p -> val < cur -> val) {
+                res = cur;
+                cur = cur -> left;
+            }
+            else {
+                cur = cur -> right;
+            }
+        }
+        return res;
+    }
+    
+};
+```

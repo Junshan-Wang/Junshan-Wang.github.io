@@ -1,12 +1,18 @@
 ---
-title: "Sliding Window"
+title: "Subarray / Submatrix with Target"
 collection: solutions
-permalink: /solutions/number_of_submatrices_that_sum_to_target/
+permalink: /solutions/subarray_submatrix_with_target/
 author_profile: true
 ---
 
+和子数组、子矩阵以及给定目标值相关的题型。  
+* 最简单的题型，返回子数组和为K的数量（560）/ 最大长度（325）：前缀和+哈希，时间复杂度O(n)
+* 扩展到二维矩阵情况（1074）：在某一维上用sliding window的方法固定一个区间，转换为一维情况，注意需要提前对行之和进行前缀和预处理，时间复杂度O(m^2n)
+* 扩展到子矩阵和不大于K的最大和：不能直接用哈希，而是采用有序结构存储+二分查找的方法，比如采用`set`结构，对应`insert`和`lower_bound`函数，时间复杂度为O(m^2nlogn)
+
 ## 560. Subarray Sum Equals K
 Given an array of integers and an integer `k`, you need to find the total number of continuous subarrays whose sum equals to `k`.
+
 
 直接暴力搜索，复杂度是`O(n^2)`。因此采用前缀+哈希的方法
 * 根据前缀和`s[i]`可以在常数时间内求出某个区间内的和，即`s[i:j] = s[:j] - s[:i-1] = k`（注意，`s[i]`不需要提前求出，在计算过程中可以直接得到）
@@ -82,4 +88,45 @@ int numSubmatrixSumTarget(vector<vector<int>>& matrix, int target) {
     }
     return ans;
 }
+```
+
+## 363. Max Sum of Rectangle No Larger Than K
+
+Given a non-empty 2D matrix matrix and an integer k, find the max sum of a rectangle in the matrix such that its sum is no larger than k.
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/max-sum-of-rectangle-no-larger-than-k
+
+首先采用上题解法，固定两列之间的区间，转换为一维情况。
+
+不能继续采用hash方法，因为无法直接访问该值，所以考虑维护一个有序结构，该数据结构的插入和查找都是O(logn)的复杂度，所以用`set`。
+
+```
+class Solution {
+public:
+    int maxSumSubmatrix(vector<vector<int>>& matrix, int k) {
+        int m = matrix.size(), n = matrix[0].size();
+        int max_sum = - INT_MAX;
+        vector<vector<int>> prefix(m + 1, vector<int>(n + 1, 0));
+        for (int i = 1; i <= m; ++i) {
+            for (int j = 1; j <= n; ++j) {
+                prefix[i][j] = prefix[i][j - 1] + matrix[i - 1][j - 1];
+            }
+        }
+        for (int i = 1; i <= n; ++i) {
+            for (int j = i; j <= n; ++j) {
+                set<int> pres{0};
+                int cur_pre = 0;
+                for (int l = 1; l <= m; ++l) {
+                    cur_pre = prefix[l][j] - prefix[l][i - 1] + cur_pre; 
+                    set<int>::iterator it = pres.lower_bound(cur_pre - k);
+                    if (it == pres.end());
+                    else if (cur_pre - *it > max_sum) max_sum = cur_pre - *it;
+                    pres.insert(cur_pre);
+                }
+            }
+        }
+        return max_sum;
+    }
+};
 ```

@@ -240,3 +240,57 @@ public:
     }
 };
 ```
+
+### 417. Pacific Atlantic Water Flow
+
+Given an m x n matrix of non-negative integers representing the height of each unit cell in a continent, the "Pacific ocean" touches the left and top edges of the matrix and the "Atlantic ocean" touches the right and bottom edges.
+
+Water can only flow in four directions (up, down, left, or right) from a cell to another one with height equal or lower.
+
+Find the list of grid coordinates where water can flow to both the Pacific and Atlantic ocean.
+
+Note:
+
+The order of returned grid coordinates does not matter.
+Both m and n are less than 150.
+
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/pacific-atlantic-water-flow  
+
+这题无法用动归求解，因为每个格子的可达性可能受到其上下左右四个格子的影响。
+
+用dfs实现。  
+一开始考虑从每个格子出发，搜索它是否能到达海洋，但是这样似乎需要保存一个vis数组和一个avail数组，比较麻烦。  
+考虑从四条海岸线出发，找到所有可达的格子，只需要一个数组进行标记即可。
+
+```
+class Solution {
+public:
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& matrix) {
+        int m = matrix.size();
+        if (m == 0) return vector<vector<int>>();
+        int n = matrix[0].size();
+        vector<vector<bool>> pac(m, vector<bool>(n, false)), atl(m, vector<bool>(n, false));
+        vector<vector<int>> res(0);
+        for (int i = 0; i < m; ++i) dfs(matrix, pac, i, 0);
+        for (int j = 0; j < n; ++j) dfs(matrix, pac, 0, j);
+        for (int i = 0; i < m; ++i) dfs(matrix, atl, i, n - 1);
+        for (int j = 0; j < n; ++j) dfs(matrix, atl, m - 1, j);
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (pac[i][j] && atl[i][j]) res.push_back(vector<int>{i, j});
+            }
+        }
+        return res;
+    }
+
+    void dfs(vector<vector<int>>& matrix, vector<vector<bool>>& mem, int i, int j) {
+        mem[i][j] = 1;
+        if (i > 0 && matrix[i][j] <= matrix[i - 1][j] && !mem[i - 1][j]) dfs(matrix, mem, i - 1, j);
+        if (j > 0 && matrix[i][j] <= matrix[i][j - 1] && !mem[i][j - 1]) dfs(matrix, mem, i, j - 1);
+        if (i < matrix.size() - 1 && matrix[i][j] <= matrix[i + 1][j] && !mem[i + 1][j]) dfs(matrix, mem, i + 1, j);
+        if (j < matrix[0].size() - 1 && matrix[i][j] <= matrix[i][j + 1] && !mem[i][j + 1]) dfs(matrix, mem, i, j + 1);
+    }
+};
+```

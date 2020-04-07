@@ -160,3 +160,64 @@ public:
     }
 };
 ```
+
+### 41. First Missing Positive
+
+Given an unsorted integer array, find the smallest missing positive integer.
+
+Your algorithm should run in O(n) time and uses constant extra space.
+
+由于不能用额外的空间，所以都是对访问过的元素作为下标对应的元素做标记，然后从头遍历，找到第一个无标记的位置
+
+我的思路是将访问过的元素标记为下标，同时下一步访问它原始元素对应的下标。还可以元素和其元素对应下标的数进行交换。
+```
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int t = 0;
+        for (int i = 0; i < nums.size(); ++i) {
+            if (nums[i] > nums.size() || nums[i] <= 0 || nums[i] == i + 1) continue;
+            else {
+                int j = nums[i] - 1;
+                while (j < nums.size() && j >= 0 && nums[j] != j + 1) {
+                    t = nums[j] - 1;
+                    nums[j] = j + 1;
+                    j = t;
+                    
+                }
+            }
+        }
+        for (int i = 0; i < nums.size(); ++i) {
+            if (nums[i] != i + 1) return i + 1;
+        }
+        return nums.size() + 1;
+    }
+};
+```
+
+
+还可以用负数标记，不过需要进行预处理，首先将所有负数标记为某个特定的值（1），那么首先还需要确定原数组是否存在1。  
+当限制空间复杂度时，我们首先注意到，第一个不存在的数一定小于等于`len(A)+1`（即`[1,len(A)]`有不存在的数，或者`[1,len(A)]`都存在则为`len(A)+1`）。当遍历到`a[i]`时，`a[abs(a[i])]=-a[abs(a[i])]`，可以实现既更新了第`i`个元素的出现情况，同时保留了第`a[i]`个元素的值。
+
+
+```
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        for (int i = 0; i < nums.size(); ++i) {
+            if (nums[i] <= 0 || nums[i] > nums.size())
+                nums[i] = nums.size() + 1;
+        }
+        for (int i = 0; i < nums.size(); ++i) {
+            int pos = abs(nums[i]) - 1;
+            if (pos >= 0 && pos < nums.size() && nums[pos] > 0)
+                nums[pos] = - nums[pos];
+        }
+        for (int i = 0; i < nums.size(); ++i) {
+            if (nums[i] > 0)
+                return i + 1;
+        }
+        return nums.size() + 1;
+    }
+};
+```

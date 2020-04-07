@@ -351,3 +351,159 @@ public:
     }
 };
 ```
+
+### 139. Word Break
+
+Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
+
+Note:
+
+The same word in the dictionary may be reused multiple times in the segmentation.  
+You may assume the dictionary does not contain duplicate words.
+
+
+暴力搜索的复杂度是指数级别的，在当前字符处，只需要考虑以当前字符作为结尾构成一个单词，是否能够划分，复杂度是O(n^2)
+
+* `dp[i] = max(dp[i - size(word[j])] && s[i, size(word[j])] == word[j], j=1, ..., n)`
+  
+```
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        vector<bool> dp(s.size(), false);
+        for (int i = 0; i < s.size(); ++i) {
+            for (string word : wordDict) {
+                if (word.size() > i + 1) continue;
+                bool v = (i + 1 == word.size() || dp[i - word.size()]) && (word == s.substr(i + 1 - word.size(), word.size()));
+                dp[i] = dp[i] || v;
+                if (dp[i]) break;
+            }
+        }
+        return dp[s.size() - 1];
+    }
+};
+```
+
+### 42. Trapping Rain Water 
+
+Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.
+
+对于每一个柱体，需要分别找到它左侧和右侧的最高点，两者的最小值减去当前柱体的高度为当前位置的储水量，但是简单的搜索需要O(n^2)的时间复杂度。  
+采用动态规划的思想，进行预处理，用总共O(n)的复杂度分别计算每一个柱体左边和右边的最高点。  
+进一步优化，实际上不需要额外的空间复杂度，只需要找到最高点位置，然后从左边到右遍历（直到到达最高点），用一个数保存当前最高点，则对于每一个位置而言它的储水量就是当前最高点（因为右侧比它高的位置是全局最高点）减去它的高度。
+
+这一题还可以用栈来做，不过不再是计算每一个位置的储水量，而是每一个高度的储水量。
+
+```
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int sum = 0, mid = 0, cur = 0;
+        for (int i = 0; i < height.size(); ++i) if (height[i] > height[mid]) mid = i;
+        for (int i = 0; i < mid; ++i) {
+            cur = max(cur, height[i]); 
+            sum += cur - height[i];
+        }
+        cur = 0;
+        for (int i = height.size() - 1; i > mid; --i) {
+            cur = max(cur, height[i]); 
+            sum += cur - height[i];
+        }
+        return sum;
+    }
+};
+```
+
+### 312. Burst Balloons
+
+Given n balloons, indexed from 0 to n-1. Each balloon is painted with a number on it represented by array nums. You are asked to burst all the balloons. If the you burst balloon i you will get nums[left] * nums[i] * nums[right] coins. Here left and right are adjacent indices of i. After the burst, the left and right then becomes adjacent.
+
+Find the maximum coins you can collect by bursting the balloons wisely.
+
+Note:
+
+You may imagine nums[-1] = nums[n] = 1. They are not real therefore you can not burst them.  
+0 ≤ n ≤ 500, 0 ≤ nums[i] ≤ 100
+
+暴力求解的复杂度是指数级别的，很显然用动态规划方法。`dp[i][i + k]`表示在i和i+k的区间内（不包括两个端点，一开始没理清楚，发现要不包括两端点才能计算）能够计算出的最大值，需要遍历`(i,i+k)`内的每一个j，作为*最后计算的值*（这里一开始没理清楚是最先计算还是最后计算，但是发现最先计算会无法计算左右两个区间）。
+* `dp[i][i + k] = max(dp[i][j] + dp[j][i + k] + nums[i] * nums[j] * nums[i + k], j = i + 1, ..., i + k - 1)`
+
+```
+class Solution {
+public:
+    int maxCoins(vector<int>& nums) {
+        int n = nums.size();
+        nums.insert(nums.begin(), 1);
+        nums.insert(nums.end(), 1);
+        vector<vector<int>> dp(n + 2, vector<int>(n + 2, 0));
+        for (int k = 2; k <= n + 1; ++k) {
+            for (int i = 0; i + k <= n + 1; ++i) {
+                for (int j = i + 1; j < i + k; ++j) {
+                    dp[i][i + k] = max(dp[i][i + k], dp[i][j] + dp[j][i + k] + nums[i] * nums[j] * nums[i + k]);
+                }
+            }
+        }
+        return dp[0][n + 1];
+    }
+};
+```
+
+
+### 240. Search a 2D Matrix II
+
+Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
+
+Integers in each row are sorted in ascending from left to right.
+Integers in each column are sorted in ascending from top to bottom.
+Example:
+
+Consider the following matrix:
+
+```
+[
+  [1,   4,  7, 11, 15],
+  [2,   5,  8, 12, 19],
+  [3,   6,  9, 16, 22],
+  [10, 13, 14, 17, 24],
+  [18, 21, 23, 26, 30]
+]
+```
+
+Given target = `5`, return `true.`
+
+Given target = `20`, return `false`.
+
+from Leetcode
+
+在一个排好序的一维数组中查找是否存在某个数，用二分查找的时间复杂度是`O(logn)`，即一个节点数为`n`的二叉树，查找的复杂度为从根节点到一个叶子结点的路径长度，即树的高度`logn`。
+
+扩展到二维数组上时，在每一步将数组划分成左上、左下、右上、右下四个部分，对于每个部分，如果target小于左上角的数或者大于右上角的数，则返回false，否则继续划分。但是此时复杂度是`O(mn)`？因为此时是一个节点数为`mn`的4叉树，且查找的复杂度不再是一条路径，在每个非叶子结点处最多会有三个子节点继续搜索。
+
+所以这里用的应该是*动态规划*的思想，从右上角开始遍历，当遍历到`matrix[i][j]`时，我们已知`target`不在`matrix[0:i][0:n]`和`matrix[0:m][j+1:n]`中，即只有可能在当前位置的左下角`matrix[i:m][0:j+1]`。此时
+* 如果`matrix[i][j]>target`，则`target`不可能在`matrix[i:m][j]`，所以继续搜索`matrix[i][j-1]`
+* 如果`matrix[i][j]<target`，则`target`不可能在`matrix[i][0:j+1]`，所以继续搜索`matrix[i+1][j]`
+
+搜索直到`i>=m`或者`j<0`，从右上走到左下，时间复杂度为`O(m+n)`。
+
+```
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int size1 = matrix.size();
+        if (size1 == 0)
+            return false;
+        int size2 = matrix[0].size();
+        int i = 0;
+        int j = size2 - 1;
+        while (i < size1 && j >= 0) {
+            if (target == matrix[i][j])
+                return true;
+            else if (target < matrix[i][j])
+                j--;
+            else 
+                i++;
+        }
+        return false;
+    }
+};
+```

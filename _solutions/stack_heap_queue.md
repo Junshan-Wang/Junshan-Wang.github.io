@@ -281,11 +281,52 @@ public:
 };
 ```
 
+### 23. Merge k Sorted Lists
+
+Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+
+最直观的想法是对每一个list维护一个当前指针，然后每次选择当前元素最小的一个list。但是这样的复杂度是O(kN)的，即每次都要遍历每个列表的指针选取最小值。维护一个最小堆，将复杂度降为O(logkN)。
+
+```
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        vector<ListNode*> pointers;
+        ListNode *head = new ListNode(0);
+        ListNode *p = head;
+        for (int i = 0; i < lists.size(); ++i) {
+            if (lists[i] != NULL) {
+                pq.push(make_pair(lists[i] -> val, pq.size()));
+                pointers.push_back(lists[i]);
+            }
+        }
+        while (!pq.empty()) {
+            int i = pq.top().second;
+            pq.pop();
+            p -> next = pointers[i];
+            p = p -> next;
+            pointers[i] = pointers[i] -> next;
+            if (pointers[i] != NULL) pq.push(make_pair(pointers[i] -> val, i));
+        }
+        return head -> next;
+    }
+};
+```
+
+
 
 ---
 ## 栈
 
 栈，先进后出。
+
+
+
+## 单调栈和单调队列
+
+* 单调栈：数组中针对每一个元素从它右边寻找第一个比它大的元素，总的复杂度是O(n)
+* 单调队列：数组中找到每一个窗口内的最大值，总的复杂度是O(n)
 
 ### 975. Odd Even Jump
 
@@ -363,7 +404,116 @@ public:
 };
 ```
 
-## 单调栈和单调队列
 
-* 单调栈：数组中针对每一个元素从它右边寻找第一个比它大的元素，总的复杂度是O(n)
-* 单调队列：数组中找到每一个窗口内的最大值，总的复杂度是O(n)
+
+### 84. Largest Rectangle in Histogram
+
+Given n non-negative integers representing the histogram's bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.
+
+这道题最暴力的方法是对柱状图中的每一个方块，计算包含它的最大面积是多少，只需要分别找到它左边和右边高度比它小的方第一个方块。但是这种方法的时间复杂度是`O(n^2)`。
+
+用动态规划的方法可以降低时间复杂度（不确定是否能到`O(n)`）。当前遍历到第$i$个方块时，我们向左寻找第一个比它小的第一个方块，不需要逐个遍历，而是用数组`left_idx[j]`保存比$j$小的第一个方块，用到已经计算好的`left_idx[j]`来加速更新`left_idx[i]`。
+
+```
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        vector<int> left_idx(heights.size(), 0);
+        vector<int> right_idx(heights.size(), 0);
+        int max_area = 0;
+        for (int i = 0; i < heights.size(); ++i) {
+            int j = i - 1;
+            while (j >= 0 && heights[j] >= heights[i])
+                j = left_idx[j];
+            left_idx[i] = j;
+        }
+        for (int i = heights.size() - 1; i >= 0; --i) {
+            int j = i + 1;
+            while (j <= heights.size() - 1 && heights[j] >= heights[i])
+                j = right_idx[j];
+            right_idx[i] = j;
+        }
+        for (int i = 0; i < heights.size(); ++i) 
+            if (heights[i] * (right_idx[i] - left_idx[i] - 1) > max_area)
+                max_area = heights[i] * (right_idx[i] - left_idx[i] - 1);
+        return max_area;
+    }
+    
+};
+```
+
+我第一次做的时候用分治的思路，即找到当前高度最小的方块$i$，则包含它的矩阵面积为`(right - left) * heights[i]`，然后分别在(left,i-1)和(i+1,right)两个区域内找最大矩阵，然后比较三者大小即可。这样的时间复杂度为`O(nlogn)`。
+
+```
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        return search(heights, 0, heights.size());
+    }
+    
+    int search(vector<int>& heights, int left, int right) {
+        if (left == right)
+            return 0;
+        int smallest_idx, smallest_height = ~(1 << 31);
+        for (int i = left; i < right; ++i)
+            if (heights[i] <= smallest_height) {
+                smallest_idx = i;
+                smallest_height= heights[i];
+            }
+        int largest_area = (right - left) * smallest_height;
+        int left_area = search(heights, left, smallest_idx);
+        int right_area = search(heights, smallest_idx + 1, right);
+        if (left_area > largest_area)
+            largest_area = left_area;
+        if (right_area > largest_area)
+            largest_area = right_area;
+        return largest_area;
+    }
+};
+```
+
+还有一种用单调栈的思路，用一个栈保存每个方块的索引，且从栈底到栈顶的方块高度是升序的。从左到右遍历每一个方块，如果当前方块的高度大于栈顶方块的高度时，则压栈；否则，表示以栈顶方块的高度形成的矩阵不能与当前方块组成矩阵，则计算以栈顶方块的高度形成的矩阵的面积大小，然后弹出栈顶，继续比较下一个栈顶和当前方块的高度大小。
+
+### 85. Maximal Rectangle
+
+Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
+
+上一题在二维场景下的扩展，只需要依次遍历每一行，以每一行作为底边计算最大矩形面积，高度可以用动态规划的思想来得到，而计算最大矩形面积可以用单调栈进行预处理，得到每一列左边和右边第一个高度比它小的位置。
+
+```
+class Solution {
+public:
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        int m = matrix.size();
+        if (m == 0) return 0;
+        int n = matrix[0].size();
+        int max_sum = 0;
+        vector<int> heights(n, 0);
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (matrix[i][j] == '0') heights[j] = 0;
+                else heights[j] += 1;
+            }
+            stack<int> st;
+            vector<int> left(n, 0), right(n, 0);
+            for (int j = 0; j < n; ++j) {
+                while (!st.empty() && heights[st.top()] >= heights[j]) st.pop();
+                if (st.empty()) left[j] = -1;
+                else left[j] = st.top(); 
+                st.push(j);
+            }
+            stack<int> st2;
+            for (int j = n - 1; j >= 0; --j) {
+                while (!st2.empty() && heights[st2.top()] >= heights[j]) st2.pop();
+                if (st2.empty()) right[j] = n;
+                else right[j] = st2.top(); 
+                st2.push(j);
+            }
+            for (int j = 0; j < n; ++j) {
+                max_sum = max(max_sum, heights[j] * (right[j] - left[j] - 1));
+            }
+        }
+        return max_sum;
+    }
+};
+```

@@ -8,28 +8,26 @@ author_profile: true
 
 ## Solutions
 
-* [LeetCode #240. Search a 2D Matrix II](https://junshan-wang.github.io/solutions/search_a_2d_matrix_2/)
-* [LeetCode #33. Search in Rotated Sorted Array](https://junshan-wang.github.io/solutions/search_in_rotated_sorted_array/)
+<!-- * [LeetCode #33. Search in Rotated Sorted Array](https://junshan-wang.github.io/solutions/search_in_rotated_sorted_array/)
 * [LeetCode #32. Longest Valid Parentheses](https://junshan-wang.github.io/solutions/longest_valid_parentheses/)
-* [LeetCode #41. First Missing Positive](https://junshan-wang.github.io/solutions/first_missing_positive/)
-* [LeetCode #45. Jump Game II](https://junshan-wang.github.io/solutions/jump_game_2/)
-* [LeetCode #56. Merge Intervals](https://junshan-wang.github.io/solutions/merge_interval/) 
-* [LeetCode #84. Largest Rectangle in Histogram](https://junshan-wang.github.io/solutions/largest_rectangle_in_histogram/)
-* [LeetCode #1074. Number of Submatrices That Sum to Target](https://junshan-wang.github.io/solutions/number_of_submatrices_that_sum_to_target/)
-* [Sliding Window](https://junshan-wang.github.io/solutions/sliding_window/)
-* [DFS / BFS](https://junshan-wang.github.io/solutions/dfs_bfs/)
-* [Binary Search](https://junshan-wang.github.io/solutions/binary_search/)
-* [Greedy Algorithm](https://junshan-wang.github.io/solutions/greedy_algorithm/)
-* [Stack / Heap / Queue](https://junshan-wang.github.io/solutions/stack_heap_queue/)
-* [Dynamic Programing](https://junshan-wang.github.io/solutions/dynamic_programing/)
-* [String](https://junshan-wang.github.io/solutions/string/)
-* [Math](https://junshan-wang.github.io/solutions/math/)
-* [Union Find](https://junshan-wang.github.io/solutions/union_find/)
-* [Segment Tree](https://junshan-wang.github.io/solutions/segment_tree/)
-* [Trie](https://junshan-wang.github.io/solutions/trie/)
-* [Binar Tree](https://junshan-wang.github.io/solutions/binary_tree/)
-* [Graph](https://junshan-wang.github.io/solutions/graph/)
+* [LeetCode #45. Jump Game II](https://junshan-wang.github.io/solutions/jump_game_2/) -->
 
+1. [Math](https://junshan-wang.github.io/solutions/math/)
+2. [DFS / BFS](https://junshan-wang.github.io/solutions/dfs_bfs/)
+3. [Binary Search](https://junshan-wang.github.io/solutions/binary_search/)
+4. [Greedy Algorithm](https://junshan-wang.github.io/solutions/greedy_algorithm/)
+5. [Stack / Heap / Queue](https://junshan-wang.github.io/solutions/stack_heap_queue/)
+6. [Dynamic Programing](https://junshan-wang.github.io/solutions/dynamic_programing/)
+7. [String](https://junshan-wang.github.io/solutions/string/)
+8. [Sliding Window](https://junshan-wang.github.io/solutions/sliding_window/)
+9.  [Binary Tree](https://junshan-wang.github.io/solutions/binary_tree/)
+10. [Union Find](https://junshan-wang.github.io/solutions/union_find/)
+11. [Segment Tree](https://junshan-wang.github.io/solutions/segment_tree/)
+12. [Trie](https://junshan-wang.github.io/solutions/trie/)
+13. [Graph](https://junshan-wang.github.io/solutions/graph/)
+14. [Two Pointers](https://junshan-wang.github.io/solutions/two_pointers/)
+15. [Divide and Conquer](https://junshan-wang.github.io/solutions/divide_and_conquer/)
+16. [Subarray / Submatrix with Target](https://junshan-wang.github.io/solutions/subarray_submatrix_with_target/)
 
 ## Essays
 

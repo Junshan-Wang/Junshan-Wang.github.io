@@ -367,3 +367,69 @@ public:
 };
 ```
 
+### 378. Kth Smallest Element in a Sorted Matrix
+
+Given a n x n matrix where each of the rows and columns are sorted in ascending order, find the kth smallest element in the matrix.
+
+Note that it is the kth smallest element in the sorted order, not the kth distinct element.
+
+[无界排序数组的二分](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/)
+
+这里的二分也不是对索引二分，而是对值进行二分，确定一个最小值和最大值，对答案进行二分。对于每一个答案，搜索有多少个值比它小，搜索的过程也可以用二分加速，搜索后根据cnt和k的大小进行放缩。这样的复杂度是O(logS * mlogn)。
+
+直接用堆的复杂度是O(mnlogk)。
+
+```
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        int m = matrix.size(), n = matrix[0].size();
+        int min_val = matrix[0][0], max_val = matrix[m - 1][n - 1];
+        while (min_val < max_val) {
+            int mid_val = (min_val + max_val) / 2;
+            int cnt = 0;
+            for (int i = 0; i < m; ++i) {
+                cnt += upper_bound(matrix[i].begin(), matrix[i].end(), mid_val) - matrix[i].begin();
+            } 
+            if (cnt < k) min_val = mid_val + 1; 
+            else max_val = mid_val;
+        }
+        return min_val;
+    }
+};
+```
+
+### 719. Find K-th Smallest Pair Distance
+
+Given an integer array, return the k-th smallest distance among all the pairs. The distance of a pair (A, B) is defined as the absolute difference between A and B.
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/find-k-th-smallest-pair-distance
+
+同样是对值进行二分。问题是如何判断当前值是否有k个小于它的差值，可以先对数组进行排序，然后用两个指针进行查找，每轮查找的复杂度是O(n)。总的复杂度是O(nlogS)。
+
+```
+class Solution {
+public:
+    int smallestDistancePair(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        int min_v = 0, max_v = nums[nums.size() - 1];
+        while (min_v < max_v) {
+            int mid_v = (min_v + max_v) / 2;
+            if (judge(nums, mid_v, k)) min_v = mid_v + 1;
+            else max_v = mid_v;
+        }
+        return min_v;
+    }
+    
+    bool judge(vector<int>& nums, int val, int k) {
+        int i = 0, j = 1, cnt = 0;
+        while (j < nums.size()) {
+            while (i < j && j < nums.size() && nums[j] - nums[i] > val) i++;
+            cnt += (j - i);
+            j++;
+        }
+        return cnt < k;
+    }
+};
+```
