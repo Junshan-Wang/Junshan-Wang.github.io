@@ -392,8 +392,6 @@ Given n non-negative integers representing an elevation map where the width of e
 采用动态规划的思想，进行预处理，用总共O(n)的复杂度分别计算每一个柱体左边和右边的最高点。  
 进一步优化，实际上不需要额外的空间复杂度，只需要找到最高点位置，然后从左边到右遍历（直到到达最高点），用一个数保存当前最高点，则对于每一个位置而言它的储水量就是当前最高点（因为右侧比它高的位置是全局最高点）减去它的高度。
 
-这一题还可以用栈来做，不过不再是计算每一个位置的储水量，而是每一个高度的储水量。
-
 ```
 class Solution {
 public:
@@ -408,6 +406,29 @@ public:
         for (int i = height.size() - 1; i > mid; --i) {
             cur = max(cur, height[i]); 
             sum += cur - height[i];
+        }
+        return sum;
+    }
+};
+```
+
+这一题还可以用栈来做，不过不再是计算每一个位置的储水量，而是每一个高度的储水量。
+
+```
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        stack<pair<int, int>> st;
+        int sum = 0;
+        for (int i = 0; i < height.size(); ++i) {
+            int down = 0;
+            while (!st.empty() && st.top().second <= height[i]) {
+                sum += (i - st.top().first - 1) * (st.top().second - down);
+                down = st.top().second;
+                st.pop();
+            }
+            if (!st.empty()) sum += (i - st.top().first - 1) * (height[i] - down);
+            st.push(make_pair(i, height[i]));
         }
         return sum;
     }

@@ -27,7 +27,8 @@ author_profile: true
 13. [Graph](https://junshan-wang.github.io/solutions/graph/)
 14. [Two Pointers](https://junshan-wang.github.io/solutions/two_pointers/)
 15. [Divide and Conquer](https://junshan-wang.github.io/solutions/divide_and_conquer/)
-16. [Subarray / Submatrix with Target](https://junshan-wang.github.io/solutions/subarray_submatrix_with_target/)
+16. [Linked List](https://junshan-wang.github.io/solutions/linked_list/)
+17. [Subarray / Submatrix with Target](https://junshan-wang.github.io/solutions/subarray_submatrix_with_target/)
 
 ## Essays
 
