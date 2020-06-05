@@ -528,3 +528,39 @@ public:
     }
 };
 ```
+
+### 5391. Build Array Where You Can Find The Maximum Exactly K Comparisons
+
+Given three integers n, m and k. Consider the following algorithm to find the maximum element of an array of positive integers:
+
+You should build the array arr which has the following properties:
+
+arr has exactly n integers.
+1 <= arr[i] <= m where (0 <= i < n).
+After applying the mentioned algorithm to arr, the value search_cost is equal to k.
+Return the number of ways to build the array arr under the mentioned conditions. As the answer may grow large, the answer must be computed modulo 10^9 + 7.
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/build-array-where-you-can-find-the-maximum-exactly-k-comparisons
+
+```
+class Solution {
+public:
+    int numOfArrays(int n, int m, int k) {
+        vector<vector<vector<long long>>> dp(n + 1, vector<vector<long long>>(m + 1, vector<long long>(k + 1, 0)));
+        if (k == 0 || k > m) return 0;
+        for (int j = 1; j <= m; ++j) dp[1][j][1] = 1;
+        for (int i = 2; i <= n; ++i) {
+            for (int j = 1; j <= m; ++j) {
+                for (int l = 1; l <= k; ++l) {
+                    dp[i][j][l] = j * dp[i - 1][j][l] % 1000000007;
+                    for (int t = 1; t < j; ++t) dp[i][j][l] = (dp[i][j][l] + dp[i - 1][t][l - 1]) % 1000000007;
+                }
+            }
+        }
+        long long res = 0;
+        for (int j = 1; j <= m; ++j) res = (res + dp[n][j][k]) % 1000000007;
+        return res;
+    }
+};
+```

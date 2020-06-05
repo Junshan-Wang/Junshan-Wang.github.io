@@ -294,3 +294,56 @@ public:
     }
 };
 ```
+
+### 300. Longest Increasing Subsequence
+
+Given an unsorted array of integers, find the length of longest increasing subsequence.
+
+Example:
+
+Input: [10,9,2,5,3,7,101,18]
+Output: 4 
+Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4. 
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/longest-increasing-subsequence
+
+最简单的解法是动态规划，复杂度是O(n^2)。
+
+```
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int ans = 0;
+        vector<int> lens(nums.size(), 1);
+        for (int i = 0; i < nums.size(); ++i) {
+            for (int j = 0; j < i; ++j) if (nums[j] < nums[i]) lens[i] = max(lens[i], lens[j] + 1);
+            ans = max(ans, lens[i]);
+        }
+        return ans;
+    }
+};
+```
+
+进一步优化，用动态规划+二分查找的方法。用`lens[j]`表示长度为`j`的子序列中最小的结尾元素，注意到`lens[j]`是单调递增的，反证法可得。从头开始遍历每一个元素，对于第`i`个元素，找到第一个比它小的`lens[j]`即可（二分），则说明以`nums[i]`结尾的子序列最大长度是`j+1`，同时相应地更新`lens[j+1]`的值。复杂度是O(n logn)。
+
+```class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int max_len = 0;
+        vector<int> lens(nums.size() + 1, INT_MAX);
+        for (int i = 0; i < nums.size(); ++i) {
+            int left = 0, right = max_len;
+            while (left < right) {
+                int mid = (left + right + 1) / 2;
+                if (lens[mid] < nums[i]) left = mid;
+                else right = mid - 1;
+            }
+            lens[left + 1] = min(lens[left + 1], nums[i]);
+            max_len = max(max_len, left + 1);
+        }
+        return max_len;
+    }
+};
+```
+

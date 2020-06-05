@@ -94,3 +94,69 @@ public:
     }
 };
 ```
+
+### 75. Sort Colors
+
+Given an array with n objects colored red, white or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white and blue.
+
+Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
+
+Note: You are not suppose to use the library's sort function for this problem.
+
+Follow up:
+
+A rather straight forward solution is a two-pass algorithm using counting sort.
+First, iterate the array counting number of 0's, 1's, and 2's, then overwrite array with total number of 0's, then 1's and followed by 2's.
+Could you come up with a one-pass algorithm using only constant space?
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/sort-colors
+
+需要一次遍历完成排序，考虑快排partition的思路，同时注意到我们只需要把0都放在开头，把2都放在结尾即可，所以可以用两个指针分别从开始和结束记录0和2的位置，此外再用一个指针从头到尾去遍历每个数进行交互。
+
+```
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int l = 0, r = nums.size() - 1, cur = 0;
+        while (cur <= r) {
+            if (nums[cur] == 0) swap(nums[cur++], nums[l++]);
+            else if (nums[cur] == 2) swap(nums[cur], nums[r--]);
+            else cur++;
+        }
+    }
+};
+```
+
+### 28. Implement strStr()
+
+Implement strStr().
+
+Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/implement-strstr
+
+最简单的方法是遍历依次比较，复杂度是$O(mn)$，可以通过双指针/滑动窗口的方法，将字符串用数字表示，时间复杂度为$O(m+n)$。  
+注意到，当字符串很长时，会溢出，所以需要整除一个整数来实现。
+
+```
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if (needle.size() == 0) return 0;
+        long long target = 0, source = 0, begin = 1;
+        for (int i = 0; i < needle.size(); ++i) {
+            target = (target * 26 + needle[i] - 'a') % INT_MAX;
+            source = (source * 26 + haystack[i] - 'a') % INT_MAX;
+            begin = (begin * 26) % INT_MAX;
+        }
+        for (int i = needle.size(); i < haystack.size(); ++i) {
+            if (source == target) return i - needle.size();
+            else source = (source * 26 - (haystack[i - needle.size()] - 'a') * begin + haystack[i] - 'a') % INT_MAX;
+        }
+        if (source == target) return haystack.size() - needle.size();
+        else return -1;
+    }
+};
+```

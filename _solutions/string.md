@@ -318,3 +318,48 @@ public:
 
 };
 ```
+
+### 151. Reverse Words in a String
+
+Given an input string, reverse the string word by word.
+
+Note:
+
+A word is defined as a sequence of non-space characters.
+Input string may contain leading or trailing spaces. However, your reversed string should not contain leading or trailing spaces.
+You need to reduce multiple spaces between two words to a single space in the reversed string.
+
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/reverse-words-in-a-string
+
+需要注意字符串以`'\0'`作为结束符。
+
+```
+class Solution {
+public:
+    string reverseWords(string s) {
+        int i = 0, j = 0, len = s.size();
+        while (i < len) {
+            if (s[i] != ' ' || (i > 0 && s[i - 1] != ' ')) {
+                s[j++] = s[i];
+            }
+            i++;
+        }
+        len = j;
+        if (len == 0 || (len == 1 && s[0] == ' ')) return "";
+        if (s[len - 1] == ' ') {len--;}
+        s[len] = '\0';
+        i = 0, j = 0;
+        while (i < len) {
+            while (j < len && s[j] != ' ') j++;
+            for (int k = 0; k < (j - i) / 2; ++k) swap(s[i + k], s[j - 1 - k]);
+            i = j + 1;
+            j = j + 1;
+        }
+        
+        for (int k = 0; k < len / 2; ++k) swap(s[k], s[len - 1 - k]);
+        return s;
+    }
+};
+```

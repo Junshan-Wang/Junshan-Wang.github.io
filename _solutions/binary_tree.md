@@ -163,3 +163,34 @@ public:
     
 };
 ```
+
+### 116. Populating Next Right Pointers in Each Node
+
+You are given a perfect binary tree where all leaves are on the same level, and every parent has two children. 
+
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+
+Initially, all next pointers are set to NULL.
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node
+
+采用树的DFS方法，对于每一个节点，由于不能用额外的空间，因此需要搜索两次。第一次分别将左子树和右子树内部的边连上，递归调用即可；第二次连接左子树和右子树每一层的边，只需要访问左子树每一层的最右节点和右子树每一层的最左节点，并将对应的边连上即可。
+
+```
+class Solution {
+public:
+    Node* connect(Node* root) {
+        if (root == NULL) return NULL;
+        connect(root -> left);
+        connect(root -> right);
+        Node *l = root -> left, *r = root -> right;
+        while (l != NULL) {
+            l -> next = r;
+            l = l -> right;
+            r = r -> left;
+        }
+        return root;
+    }
+};
+```
