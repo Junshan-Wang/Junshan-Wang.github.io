@@ -82,3 +82,38 @@ public:
     }
 };
 ```
+
+### 395. Longest Substring with At Least K Repeating Characters
+
+Find the length of the longest substring T of a given string (consists of lowercase letters only) such that every character in T appears no less than k times.
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters
+
+暴力遍历每一种子串的方法复杂度是`O(n^2)`，简单的滑动窗口无法解（似乎可以改进，分别考虑子串内不同字符数量为0～26时的情况）。  
+这里才用分治的方法，对于每一个子串，遍历一次统计每个字符出现的次数，然后找到其出现次数小于`k`的字符出现的位置，并进行`m`路分治。复杂度是`O(nlogn)`。
+
+```
+class Solution {
+public:
+    int longestSubstring(string s, int k) {  
+        vector<int> cha2cnt(26, 0);
+        int max_len = 0, min_cnt_idx = -1, last_split = -1;
+        for (int i = 0; i < s.size(); ++i) cha2cnt[s[i] - 'a'] += 1;
+        for (int i = 0; i < 26; ++i) if (cha2cnt[i] > 0 && (min_cnt_idx == -1 || cha2cnt[i] < cha2cnt[min_cnt_idx])) min_cnt_idx = i;
+        if (min_cnt_idx == -1 || cha2cnt[min_cnt_idx] >= k) return s.size();
+        for (int i = 0; i < s.size(); ++i) {
+            if (s[i] - 'a' == min_cnt_idx) {
+                if (i - last_split - 1 > 0 && i - last_split - 1 > max_len) {
+                    string t = s.substr(last_split + 1, i - last_split - 1);
+                    max_len = max(max_len, longestSubstring(t, k));
+                }
+                last_split = i;
+            } 
+        }
+        string t = s.substr(last_split + 1, s.size() - last_split - 1);
+        max_len = max(max_len, longestSubstring(t, k));
+        return max_len;
+    }
+};
+```
