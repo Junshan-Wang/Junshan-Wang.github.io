@@ -36,4 +36,4 @@ author_profile: true
 
 * 在训练过程中会计算MRR值（一组正例对应999个负例）
 * 最终提交的结果，是在给定了99个queries，然后返回这些queries的6种语言上预测结果，计算NDCG值（在整个代码库中查找）
-* 运行`python predict.py`后，会生成`predictions.csv`文件，注意到在代码里是通过上传至服务器，从而可以直接提交。如果是用自己的预测方法，也要用类似的方法上传。
+* 运行`python predict.py`后，会生成`predictions.csv`文件，注意到在代码里是通过wandb API上传至服务器，从而可以直接提交。如果是用自己的预测方法，也要用类似的方法上传。
