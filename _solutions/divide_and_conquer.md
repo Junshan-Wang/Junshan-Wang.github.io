@@ -117,3 +117,59 @@ public:
     }
 };
 ```
+
+### 315. Count of Smaller Numbers After Self
+
+You are given an integer array nums and you have to return a new counts array. The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self
+
+首先想到归并算法，用来统计数组中逆序对的数量，但是这题需要统计每个元素对应的逆序对的数量。考虑到归并排序时元素位置发生变化，需要额外用一个索引数组来映射每个元素对应的原始位置。
+
+```
+class Solution {
+public:
+    vector<int> ans;
+    vector<int> countSmaller(vector<int>& nums) {
+        if (nums.size() == 0) return ans;
+        vector<int> idxs;
+        for (int i = 0; i < nums.size(); ++i) {
+            idxs.push_back(i);
+            ans.push_back(0);
+        }
+        mergeSort(nums, idxs, 0, nums.size() - 1);
+        return ans;
+    }
+
+    void mergeSort(vector<int>& nums, vector<int>& idxs, int left, int right) {
+        if (left == right) return;
+        int middle = (left + right) / 2;
+        mergeSort(nums, idxs, left, middle);
+        mergeSort(nums, idxs, middle + 1, right);
+        vector<int> tmp(0);
+        int i = left, j = middle + 1;
+        while (i <= middle && j <= right) {
+            if (nums[idxs[i]] <= nums[idxs[j]]) {
+                tmp.push_back(idxs[i]);
+                ans[idxs[i]] += (j - middle - 1);
+                i++;
+            }
+            else {
+                tmp.push_back(idxs[j]);
+                j++;
+            }
+        }
+        while (i <= middle) {
+            tmp.push_back(idxs[i]);
+            ans[idxs[i]] += (j - middle - 1);
+            i++;
+        }
+        while (j <= right) {
+            tmp.push_back(idxs[j]);
+            j++;
+        }
+        for (i = 0; i <= right - left; ++i) idxs[left + i] = tmp[i];
+    }
+};
+```
