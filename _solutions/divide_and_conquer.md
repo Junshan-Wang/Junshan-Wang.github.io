@@ -125,7 +125,8 @@ You are given an integer array nums and you have to return a new counts array. T
 来源：力扣（LeetCode）  
 链接：https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self
 
-首先想到归并算法，用来统计数组中逆序对的数量，但是这题需要统计每个元素对应的逆序对的数量。考虑到归并排序时元素位置发生变化，需要额外用一个索引数组来映射每个元素对应的原始位置。
+首先想到归并算法，用来统计数组中逆序对的数量，但是这题需要统计每个元素对应的逆序对的数量。考虑到归并排序时元素位置发生变化，需要额外用一个索引数组来映射每个元素对应的原始位置。  
+时间复杂度是O(nlogn)。
 
 ```
 class Solution {

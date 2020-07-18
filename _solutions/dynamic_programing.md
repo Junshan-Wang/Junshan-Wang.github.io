@@ -564,3 +564,115 @@ public:
     }
 };
 ```
+
+### 140. Word Break II
+
+Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, add spaces in s to construct a sentence where each word is a valid dictionary word. Return all such possible sentences.
+
+Note:
+
+The same word in the dictionary may be reused multiple times in the segmentation.
+You may assume the dictionary does not contain duplicate words.
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/word-break-ii
+
+直接暴力搜索的方法复杂度是O(n!)，用trie树也会超时。
+如果只是判断是否存在合法分割，则只需要O(n^2)的复杂度，但是因为要返回所有可能的集合，用记忆化搜索(也可以改为动态规划）的方法，避免重复计算，复杂度为O(n^3)。  
+注意到一个特例无法通过，所以先用O(n^2)复杂度的方法判断是否存在合法分割。
+
+```
+class Solution {
+public:
+    vector<vector<string>> dp;
+    unordered_set<string> wordSet;
+    int max_len = 0;
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        dp = vector<vector<string>>(s.size(), vector<string>(0));
+        dp.push_back(vector<string>(1, ""));
+        for (string word : wordDict) wordSet.insert(word);
+
+        if (wordDict.size() == 0) return vector<string>(0);
+        vector<int> reach(s.size(), 0);
+        for(int i = 0; i < s.size(); ++i){
+            for(int j = i; j >= 0; --j){
+                if((j == 0 || reach[j - 1] == 1) && wordSet.find(s.substr(j, i - j + 1)) != wordSet.end()){
+                    reach[i] = 1;
+                    break;
+                }
+            }
+        }
+        if (reach[s.size() - 1] == 0) return vector<string>(0);
+
+        dfs(s, 0);
+        vector<string> ans(0);
+        for (string t : dp[0]) ans.push_back(t.substr(0, t.size() - 1));
+        return ans;
+    }
+
+    void dfs(string s, int i) {
+        if (dp[i].size() > 0) return;
+        for (int j = i + 1; j <= s.size(); ++j) {
+            string word = s.substr(i, j - i);
+            if (wordSet.find(word) != wordSet.end()) {
+                dfs(s, j);
+                for (string t : dp[j]) dp[i].push_back(word + " " + t);
+            }
+        }
+    }
+};
+```
+
+
+### 300. Longest Increasing Subsequence
+
+Given an unsorted array of integers, find the length of longest increasing subsequence.
+
+Example:
+
+Input: [10,9,2,5,3,7,101,18]
+Output: 4 
+Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4. 
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/longest-increasing-subsequence
+
+最简单的解法是动态规划，复杂度是O(n^2)。
+
+```
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int ans = 0;
+        vector<int> lens(nums.size(), 1);
+        for (int i = 0; i < nums.size(); ++i) {
+            for (int j = 0; j < i; ++j) if (nums[j] < nums[i]) lens[i] = max(lens[i], lens[j] + 1);
+            ans = max(ans, lens[i]);
+        }
+        return ans;
+    }
+};
+```
+
+进一步优化，用动态规划+二分查找的方法。用`lens[j]`表示长度为`j`的子序列中最小的结尾元素，注意到`lens[j]`是单调递增的，反证法可得。从头开始遍历每一个元素，对于第`i`个元素，找到第一个比它小的`lens[j]`即可（二分），则说明以`nums[i]`结尾的子序列最大长度是`j+1`，同时相应地更新`lens[j+1]`的值。复杂度是O(n logn)。
+
+```
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int max_len = 0;
+        vector<int> lens(nums.size() + 1, INT_MAX);
+        for (int i = 0; i < nums.size(); ++i) {
+            int left = 0, right = max_len;
+            while (left < right) {
+                int mid = (left + right + 1) / 2;
+                if (lens[mid] < nums[i]) left = mid;
+                else right = mid - 1;
+            }
+            lens[left + 1] = min(lens[left + 1], nums[i]);
+            max_len = max(max_len, left + 1);
+        }
+        return max_len;
+    }
+};
+```
