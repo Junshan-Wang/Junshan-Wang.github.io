@@ -110,3 +110,36 @@ public:
     }
 };
 ```
+
+### 剑指 Offer 38. 字符串的排列
+
+输入一个字符串，打印出该字符串中字符的所有排列。
+
+你可以以任意顺序返回这个字符串数组，但里面不能有重复元素。
+
+这一题挺简单的，不过一开始写的比较复杂。注意用交换元素的方法即可，即固定第i位元素，然后往后遍历，同时注意排除重复元素，只需要保证每一位出现的字符不重复即可，用一个unorderset来标记。
+
+```
+class Solution {
+public:
+    vector<string> ans;
+    vector<string> permutation(string s) {
+        per(s, 0);
+        return ans;
+    }
+    void per(string s, int pos) {
+        unordered_set<char> first;
+        if (pos == s.size()) {
+            ans.push_back(s);
+            return;
+        }
+        for (int i = pos; i < s.size(); ++i) {
+            if (first.find(s[i]) != first.end()) continue;
+            else first.insert(s[i]);
+            string t(s);
+            swap(t[pos], t[i]);
+            per(t, pos + 1);
+        }
+    }
+};
+```

@@ -221,3 +221,40 @@ public:
     }
 };
 ```
+
+### 剑指 Offer 43. 1～n整数中1出现的次数
+
+输入一个整数 n ，求1～n这n个整数的十进制表示中1出现的次数。
+
+例如，输入12，1～12这些整数中包含1 的数字有1、10、11和12，1一共出现了5次。
+
+
+
+来源：力扣（LeetCode）  
+链接：https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof  
+
+考虑每一位出现1的次数，需要同时考虑比它高的位数和比它低的位数。分成三种情况考虑：
+* 如果当前位数的数字`cur=0`，则出现1的次数是，它的高位数字`high`乘上低位的总次数
+* 如果`cur=1`，则出现1的次数是，它的高位数字`high`乘上低位的总次数，再加上低位数字`low`
+* 如果`cur>1`，则出现1的次数是，它的高位数字加1`high+1`乘上低位的总次数
+
+```
+class Solution {
+public:
+    int countDigitOne(int n) {
+        int cnt = 0;
+        for (int i = 0; i < 100; ++i) {
+            long long mask = pow(10, i);
+            long long low = n % mask;
+            long long high = n / (mask * 10);
+            long long cur = n / mask % 10;
+
+            if (cur == 0 && high == 0) break;
+            else if (cur == 0) cnt += high * mask;
+            else if (cur == 1) cnt += high * mask + low + 1;
+            else cnt += (high + 1) * mask;
+        }
+        return cnt;
+    }
+};
+```

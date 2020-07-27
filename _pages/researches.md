@@ -25,5 +25,3 @@ Air quality has drawn much attention on the recent years because it seriously af
 
 ### Inferring Explicit and Implicit Social Ties Simultaneously in Mobile Social Network
 In mobile social network, social tie recognition is a significant task. A great portion of relations are hidden from the interactions in mobile social network. Inferring these implicit social ties can be applied in many aspects like recommender system. But it is challenging because there isn’t any explicit interaction information of these implicit ties in mobile social network. In this paper, we propose a community-based recognition model to infer explicit and implicit social ties simultaneously. Firstly, we observe community features by empirical analysis. It shows that communities with different relation types have different features. Secondly, we propose a communal factor graph to infer social ties. We extract community features, build up a community layer that treats each community as a node. We experiment our model on both implicit and explicit ties and results confirm that using our community features based model can reach a better recognition result.
-
-!()[]
