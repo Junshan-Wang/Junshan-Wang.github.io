@@ -36,3 +36,4 @@ author_profile: true
 2. [Word2vec代码阅读](https://junshan-wang.github.io/essays/word2vec_tensorflow_code_reading/)
 3. [GNN Paper Reading](https://junshan-wang.github.io/essays/gnn_paper_reading_2020/)
 4. [Code Search Net说明](https://junshan-wang.github.io/essays/code_search_net/)
+5. [动态网络表示学习综述](https://junshan-wang.github.io/essays/dynamic_network_embedding/)
