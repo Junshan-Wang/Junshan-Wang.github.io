@@ -24,7 +24,7 @@ author_profile: true
 ### 1. Dynamic Network Embedding by Modeling Triadic Closure Process（AAAI 2018）
 * 基于三角闭包，通过建模开三角形成闭三角的过程，来刻画演变规律
 
-![dynamictriad](../images/dynamic_network_embedding_img/dynamictriad.png)
+![](../images/dynamic_network_embedding_img/dynamictriad.png)
 
 ### 2. Embedding Temporal Network via Neighborhood Formation（KDD 2018）
 * 基于点过程（Hawkes process），一条边的生成概率由一个基本概率和其他边的影响组成
