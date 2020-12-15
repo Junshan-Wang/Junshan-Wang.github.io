@@ -39,11 +39,10 @@ author_profile: true
 
 ![tonodeembed](../../images/dynamic_network_embedding_img/tonodeembed.png)
 
-### 5. Dynamic Graph Representation Learning Via Self-Attention Networks（ICLR 2019 Workshop）
-* 结构上，利用GAT
-* 时间上，所有时间片上得到的表示向量再通过self-attention
+### 5. EPNE: Evolutionary Pattern Preserving Network Embedding（ECAI 2020）
+* 基于因果卷积刻画图演变的周期性和非周期性信息
 
-![dysat](../../images/dynamic_network_embedding_img/dysat.png)
+![epne](../../images/dynamic_network_embedding_img/epne.png)
 
 ### 6. Learning Dynamic Context Graphs for Predicting Social Events（KDD 2019）
 * 任务场景：预测social events
@@ -66,20 +65,31 @@ author_profile: true
 
 ![graphwavenet](../../images/dynamic_network_embedding_img/graphwavenet.png)
 
-### 11. EvolveGCN: Evolving Graph Convolutional Networks for Dynamic Graphs（AAAI 2020）
+### 11. Dynamic Graph Representation Learning Via Self-Attention Networks（ICLR 2019 Workshop）
+* 结构上，利用GAT
+* 时间上，所有时间片上得到的表示向量再通过self-attention
+
+![dysat](../../images/dynamic_network_embedding_img/dysat.png)
+
+### 12. EvolveGCN: Evolving Graph Convolutional Networks for Dynamic Graphs（AAAI 2020）
 * 利用RNN建模每个时间片上GCN模型的参数，适用于更强
 
 ![evolvegcn](../../images/dynamic_network_embedding_img/evolvegcn.png)
 
-### 12. Streaming Graph Neural Networks（SIGIR 2020）
+### 13. Streaming Graph Neural Networks（SIGIR 2020）
 * update component：先更新新来边的两个顶点
 * propogation component：再更新相连的其他顶点
 * 借鉴LSTM，引入cell和state保持节点的时序信息，考虑时间间隔
 
 ![dgnn](../../images/dynamic_network_embedding_img/dgnn.png)
 
-### 13. Spatio-Temporal Graph Convolutional Networks: A Deep Learning Framework for Traffic Forecasting（IJCAI 2018）
-* 
+### 14. Spatio-Temporal Graph Convolutional Networks: A Deep Learning Framework for Traffic Forecasting（IJCAI 2018）
+* 空间上：谱域卷积，以避免cnn只捕获网格信息
+* 时间上：卷积，以避免RNN的训练复杂度并捕获长时信息
+
+![stgcn](../../images/dynamic_network_embedding_img/stgcn.png)
+
+
 
 
 ## 图模型高效更新
