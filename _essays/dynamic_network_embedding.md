@@ -24,7 +24,7 @@ author_profile: true
 ### 1. Dynamic Network Embedding by Modeling Triadic Closure Process（AAAI 2018）
 * 基于三角闭包，通过建模开三角形成闭三角的过程，来刻画演变规律
 
-![](../images/dynamic_network_embedding_img/dynamictriad.png)
+![dynamictriad](../../images/dynamic_network_embedding_img/dynamictriad.png)
 
 ### 2. Embedding Temporal Network via Neighborhood Formation（KDD 2018）
 * 基于点过程（Hawkes process），一条边的生成概率由一个基本概率和其他边的影响组成
@@ -77,6 +77,9 @@ author_profile: true
 * 借鉴LSTM，引入cell和state保持节点的时序信息，考虑时间间隔
 
 ![dgnn](../images/dynamic_network_embedding_img/dgnn.png)
+
+### 13. Spatio-Temporal Graph Convolutional Networks: A Deep Learning Framework for Traffic Forecasting（IJCAI 2018）
+* 
 
 
 ## 图模型高效更新
